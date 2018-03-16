@@ -9,7 +9,6 @@ export default StyleSheet.create({
     width: config.screenWidth,
     bottom: 0,
     left: 0,
-    zIndex:999
   },
   thumbnailContainer: {
     //borderWidth: 1, borderColor: "green"

@@ -17,6 +17,7 @@ import {
 import spinner from "../../Images/loader_new.gif";
 import { appThemeColor } from "../../AppGlobalConfig";
 import Dimensions from "Dimensions";
+import { URL_CONFIG } from "../../AppUrlConfig";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
@@ -32,6 +33,30 @@ export default class SignupScreen extends Component {
     this.growAnimated = new Animated.Value(0);
     this._onPress = this._onPress.bind(this);
     this.state.userRole = "healthworker";
+  }
+
+  onClickOK(alertId) {
+    if (alertId == "success") {
+      console.log("onclickok success case called");
+    } else {
+      console.log("onclickok else case called");
+    }
+  }
+
+  displayAlert(alertId, title, message) {
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            this.onClickOK(alertId);
+          }
+        }
+      ],
+      { cancelable: false }
+    );
   }
 
   _onPress() {
@@ -59,7 +84,7 @@ export default class SignupScreen extends Component {
         practiceId: this.state.userId
       };
       console.log(payload);
-      fetch("https://mydoc-backend.herokuapp.com/mydoc/users/register", {
+      fetch(URL_CONFIG.BASE_URL + URL_CONFIG.REGISTER_USER, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -69,10 +94,20 @@ export default class SignupScreen extends Component {
       })
         .then(response => response.json())
         .then(responseJson => {
+          if (responseJson.code == 0) {
+            this.displayAlert(
+              "success",
+              "Success",
+              "User registered successfully!!"
+            );
+          } else {
+            this.displayAlert("failed", "Failed", "Failed to register user!!");
+          }
           console.log(responseJson);
         })
         .catch(error => {
           console.error(error);
+          this.displayAlert("failed", "Failed", "Failed to register user!!");
         });
       this.setState({ isLoading: false });
       this.buttonAnimated.setValue(0);
@@ -245,7 +280,7 @@ export default class SignupScreen extends Component {
   }
 }
 const styles = StyleSheet.create({
-  actionbtn:{
+  actionbtn: {
     marginTop: 20
   },
   container: {

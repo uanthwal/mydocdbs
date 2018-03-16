@@ -288,6 +288,7 @@ if(!IS_BROWSER) {
     join,
     countFriends,
     getLocalStream,
-    broadcastMessage
+    broadcastMessage,
+    leave
   }
 }

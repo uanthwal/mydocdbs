@@ -13,11 +13,15 @@ import {
   TextInput,
   ScrollView,
   RadioButton,
-  Keyboard
+  Keyboard,
+  BackHandler,
+  ToastAndroid
 } from "react-native";
 import spinner from "../../Images/loader_new.gif";
 import { appThemeColor } from "../../AppGlobalConfig";
 import Dimensions from "Dimensions";
+import { URL_CONFIG } from "../../AppUrlConfig";
+import NavigationActions from "react-navigation/src/NavigationActions";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
@@ -33,6 +37,23 @@ export default class AddPatientScreen extends Component {
     this.growAnimated = new Animated.Value(0);
     this._onPress = this._onPress.bind(this);
     this.state.gender = "male";
+    this.handleBackButton = this.handleBackButton.bind(this);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
+    this.props.navigation.navigate("drawerStack");
+  }
+
+  handleBackButton() {
+    this.props.navigation.navigate("drawerStack");
+    return true;
+    // ToastAndroid.show('Back button is pressed this',this, ToastAndroid.LONG);
+    // return true;
   }
 
   _onPress() {
@@ -60,7 +81,7 @@ export default class AddPatientScreen extends Component {
         gender: this.state.gender
       };
       console.log(payload);
-      fetch("https://mydoc-backend.herokuapp.com/mydoc/patient/add", {
+      fetch(URL_CONFIG.BASE_URL + URL_CONFIG.ADD_PATIENT, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -70,6 +91,15 @@ export default class AddPatientScreen extends Component {
       })
         .then(response => response.json())
         .then(responseJson => {
+          if (responseJson.code == 0) {
+            this.displayAlert(
+              "success",
+              "Success",
+              "User registered successfully!!"
+            );
+          } else {
+            this.displayAlert("failed", "Failed", "Failed to register user!!");
+          }
           console.log(responseJson);
         })
         .catch(error => {
@@ -93,6 +123,31 @@ export default class AddPatientScreen extends Component {
     console.log(data);
     this.setState({ gender: data });
   }
+
+  onClickOK(alertId) {
+    if (alertId == "success") {
+      console.log("onclickok success case called");
+    } else {
+      console.log("onclickok else case called");
+    }
+  }
+
+  displayAlert(alertId, title, message) {
+    Alert.alert(
+      title,
+      message,
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            this.onClickOK(alertId);
+          }
+        }
+      ],
+      { cancelable: false }
+    );
+  }
+
   render() {
     const changeWidth = this.buttonAnimated.interpolate({
       inputRange: [0, 1],
@@ -237,7 +292,7 @@ export default class AddPatientScreen extends Component {
   }
 }
 const styles = StyleSheet.create({
-  actionbtn:{
+  actionbtn: {
     marginTop: 20
   },
   container: {

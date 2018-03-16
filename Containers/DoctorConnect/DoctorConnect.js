@@ -6,7 +6,9 @@ import {
   View,
   ListView,
   Image,
-  TextInput
+  TextInput,
+  BackHandler,
+  Button
 } from "react-native";
 import { RTCView } from "react-native-webrtc";
 import Thumbnails from "./components/Thumbnails.js";
@@ -14,6 +16,7 @@ import FullScreenVideo from "./components/FullScreenVideo.js";
 import Commons from "./lib/commons.js";
 import styles from "../style/app.js";
 import config from "./config/app.js";
+import InCallManager from "react-native-incall-manager";
 
 const sampleStreamURLs = [
   require("../image/sample-image-1.jpg"),
@@ -41,9 +44,11 @@ export default class DoctorScreen extends Component {
       joinState: "ready", //joining, joined
       name: "mydocdbs"
     };
+    this.handleBackButton = this.handleBackButton.bind(this);
   }
 
   componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
     webRTCServices.getLocalStream(true, stream => {
       this.setState({
         activeStreamId: SELF_STREAM_ID,
@@ -57,61 +62,52 @@ export default class DoctorScreen extends Component {
     });
   }
 
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
+  }
+
+  handleBackButton() {
+    // this.props.navigation.pop();
+    console.log("back button pressed: ", this.props);
+    return true;
+  }
+
   render() {
-    let activeStreamResult = this.state.streams.filter(
-      stream => stream.id == this.state.activeStreamId
-    );
-    return (
-      <View style={styles.container}>
-        <Image
-          source={backgroundImage}
-          blurRadius={3}
-          style={styles.backgroundImage}
-        />
-        <View style={styles.backgroundOverlay} />
-        {this.state.joinState == "joined" ? (
-          <FullScreenVideo
-            streamURL={
-              activeStreamResult.length > 0 ? activeStreamResult[0].url : null
-            }
-          />
-        ) : null}
-        {this.state.joinState == "joined" ? (
-          <Thumbnails
-            streams={this.state.streams}
-            setActive={this.handleSetActive.bind(this)}
-            activeStreamId={this.state.activeStreamId}
-          />
-        ) : null}
-        {this.renderJoinContainer()}
-      </View>
-    );
+    let activeStreamResult = this.state.streams.filter(stream => stream.id == this.state.activeStreamId);
+    return <View style={styles.container}>
+      <Image source={backgroundImage} blurRadius={3} style={styles.backgroundImage}/>
+      <View style={styles.backgroundOverlay} />
+      {
+        this.state.joinState == "joined" ?
+        <FullScreenVideo streamURL={activeStreamResult.length > 0 ? activeStreamResult[0].url : null} />
+        :
+        null
+      }
+      {
+        this.state.joinState == "joined"?
+        <Thumbnails streams={this.state.streams}
+          setActive={this.handleSetActive.bind(this)}
+          activeStreamId={this.state.activeStreamId}/>
+        :
+        null
+      }
+      {this.renderJoinContainer()}
+    </View>
   }
 
   renderJoinContainer() {
-    if (this.state.joinState != "joined") {
-      return (
-        <View style={styles.joinContainer}>
-          <Text style={styles.joinLabel}>
-            Be the first to join this conversation
-          </Text>
-          <TextInput
-            style={styles.joinName}
-            placeholder={"Enter your name"}
-            placeholderTextColor={"#888"}
-            onChangeText={name => this.setState({ name })}
-            value={this.state.name}
-          />
-          <TouchableHighlight
-            style={styles.joinButton}
-            onPress={this.handleJoinClick.bind(this)}
-          >
-            <Text style={styles.joinButtonText}>
-              {this.state.joinState == "ready" ? "Join" : "Joining..."}
-            </Text>
-          </TouchableHighlight>
-        </View>
-      );
+    if(this.state.joinState != "joined") {
+      return <View style={styles.joinContainer}>
+        <Text style={styles.joinLabel}>Be the first to join this conversation</Text>
+        <TextInput style={styles.joinName}
+          placeholder={"Enter your name"} placeholderTextColor={"#888"}
+          onChangeText={(name) => this.setState({name})}
+          value={this.state.name} />
+        <TouchableHighlight style={styles.joinButton}
+            onPress={this.handleJoinClick.bind(this)}>
+          <Text style={styles.joinButtonText}>{this.state.joinState == "ready" ? "Join" : "Joining..."}</Text>
+        </TouchableHighlight>
+      </View>
     }
     return null;
   }
@@ -134,8 +130,11 @@ export default class DoctorScreen extends Component {
       joined: this.handleJoined.bind(this),
       friendConnected: this.handleFriendConnected.bind(this),
       friendLeft: this.handleFriendLeft.bind(this),
-      dataChannelMessage: this.handleDataChannelMessage.bind(this)
+      dataChannelMessage: this.handleDataChannelMessage.bind(this),
+      leave: this.handleOnClickEndCall.bind(this)
     };
+    InCallManager.setForceSpeakerphoneOn(true);
+    InCallManager.setKeepScreenOn(true);
     webRTCServices.join(VIDEO_CONFERENCE_ROOM, this.state.name, callbacks);
   }
 
@@ -171,4 +170,9 @@ export default class DoctorScreen extends Component {
   }
 
   handleDataChannelMessage(message) {}
+
+  handleOnClickEndCall() {
+    console.log("handleOnClickEndCall: ", this);
+    // webRTCServices.leave();
+  }
 }

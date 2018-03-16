@@ -15,9 +15,10 @@ import DoctorConnectScreen from "../Containers/DoctorConnect/DoctorConnect";
 import Screen2 from "../Containers/Screen2";
 import Screen3 from "../Containers/Screen3";
 import DrawerContainer from "../Containers/DrawerContainer";
-import appThemeColor from "../AppGlobalConfig";
+import { appThemeColor } from "../AppGlobalConfig";
 
 import menuIcon from "../Images/menu.png";
+import DoctorSearchScreen from "../Containers/Search/SearchDoctorScreen";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -33,12 +34,12 @@ const DrawerStack = DrawerNavigator(
     homescreen: { screen: HomeScreen, headerMode: "float" },
     profilescreen: { screen: ProfileScreen, headerMode: "float" },
     ratingscreen: { screen: RatingScreen, headerMode: "float" },
-    aboutscreen: { screen: AboutScreen, headerMode: "float" },
+    aboutscreen: { screen: AboutScreen, headerMode: "float" }
     // doctorconnectscreen: {
     //   screen: DoctorConnectScreen,
     //   navigationOptions: { title: "Connect to Doctor" }
     // },
-  },  
+  },
   {
     gesturesEnabled: false,
     contentComponent: DrawerContainer
@@ -67,7 +68,7 @@ const DrawerNavigation = StackNavigator(
   {
     headerMode: "screen",
     navigationOptions: ({ navigation }) => ({
-      headerStyle: { backgroundColor: "#fe4c4c" },
+      headerStyle: { backgroundColor: appThemeColor.btnBgColor, marginLeft: 0 },
       title: "MyDoc",
       headerTintColor: "white",
       gesturesEnabled: false,
@@ -92,7 +93,7 @@ const LoginStack = StackNavigator(
   {
     headerMode: "float",
     navigationOptions: {
-      headerStyle: { backgroundColor: "#fe4c4c" },
+      headerStyle: { backgroundColor: appThemeColor.btnBgColor },
       // title: 'You are not logged in',
       headerTintColor: "white"
     }
@@ -101,23 +102,45 @@ const LoginStack = StackNavigator(
 
 const HomeStack = StackNavigator(
   {
-    homescreen: {
-      screen: DrawerNavigation,
-    },
     addpatientscreen: {
       screen: AddPatientScreen,
       headerMode: "none",
-      navigationOptions: { title: "Add Patient" }
+      navigationOptions: {
+        title: "Add Patient",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
     },
     doctorconnectscreen: {
       screen: DoctorConnectScreen,
-      navigationOptions: { title: "Connect to Doctor" }
+      navigationOptions: {
+        title: "Connect to Doctor",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
     },
+    doctorsearchscreen: {
+      screen: DoctorSearchScreen,
+      navigationOptions: {
+        title: "Search Doctor",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    }
   },
   {
     headerMode: "float",
     navigationOptions: {
-      headerStyle: { backgroundColor: "#fe4c4c" },
+      headerStyle: { backgroundColor: appThemeColor.btnBgColor },
       // title: "home stack",
       headerTintColor: "white"
     }

@@ -50,8 +50,8 @@ export default class HomeScreen extends Component {
     const categories = [
       {
         icon: require("../../Images/icon/search_doctor.png"),
-        label: "Search Doctor"
-        // page: DoctorSearchPage
+        label: "Search Doctor",
+        page: "doctorsearchscreen"
       },
       {
         icon: require("../../Images/icon/connect.png"),
@@ -60,18 +60,18 @@ export default class HomeScreen extends Component {
       },
       {
         icon: require("../../Images/icon/search_patient.png"),
-        label: "Search Patient"
-        //     // page: AddDoctorPage
+        label: "Search Patient",
+        page: ""
       },
       {
         icon: require("../../Images/icon/chatbot.png"),
-        label: "Chat Bot"
-        //   // page: ChatBotPage
+        label: "Chat Bot",
+        page: ""
       },
       {
         icon: require("../../Images/icon/reports.png"),
-        label: "My Reports"
-        //   // page: MyReportsPage
+        label: "My Reports",
+        page: ""
       },
       {
         icon: require("../../Images/icon/patient.png"),
@@ -80,18 +80,18 @@ export default class HomeScreen extends Component {
       },
       {
         icon: require("../../Images/icon/upload.png"),
-        label: "Scan Upload"
-        //   // page: ScanUploadPage
+        label: "Scan Upload",
+        page: ""
       },
       {
         icon: require("../../Images/icon/history.png"),
-        label: "History"
-        //   // page: HistoryPage
+        label: "History",
+        page: ""
       },
       {
         icon: require("../../Images/icon/notifications.png"),
-        label: "Notifications"
-        //     // page: NotificationsPage
+        label: "Notifications",
+        page: ""
       }
     ];
 

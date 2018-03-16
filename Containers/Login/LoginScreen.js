@@ -23,6 +23,7 @@ import Dimensions from "Dimensions";
 import passwordImg from "../../Images/password.png";
 import eyeImg from "../../Images/eye_black.png";
 import usernameImg from "../../Images/username.png";
+import { URL_CONFIG } from "../../AppUrlConfig";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
@@ -58,7 +59,7 @@ export default class LoginScreen extends Component {
     }, 2000);
 
     setTimeout(() => {
-      fetch("https://mydoc-backend.herokuapp.com/mydoc/users/login", {
+      fetch(URL_CONFIG.BASE_URL + URL_CONFIG.LOGIN_URL, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -78,6 +79,19 @@ export default class LoginScreen extends Component {
             this.setState({ userId: responseJson.data });
             this.props.navigation.navigate("drawerStack");
           } else {
+            Alert.alert(
+              "Invalid Credentials",
+              "Please enter correct Username and Password!!",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    console.log('OK pressed')
+                  }, style: 'cancel'
+                }
+              ],
+              { cancelable: false }
+            );
           }
           this.setState({ isLoading: false });
           this.buttonAnimated.setValue(0);

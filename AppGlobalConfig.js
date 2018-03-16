@@ -1,13 +1,13 @@
 export var appThemeColor = {
     color: '#ffffff',
-    ipBgColor: '#fe4c4c',
+    ipBgColor: '#32c24d',
     ipPlaceholderColor: 'white',
-    textColorTheme: '#fe4c4c',
+    textColorTheme: '#32c24d',
     screenBgColor: '#ffffff',
-    btnBgColor: '#fe4c4c',
+    btnBgColor: '#32c24d',
     btnTextColor: 'white',
     textColorWhite:'white',
-    separatorColor: '#fe4c4c'
+    separatorColor: '#32c24d'
 };
 
 // color: '#32c24d',

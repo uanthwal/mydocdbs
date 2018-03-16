@@ -59,15 +59,6 @@ export default class DrawerContainer extends React.Component {
           About us
         </Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.drawerItem}
-      onPress={() => navigation.navigate('doctorconnectscreen')}
-        activeOpacity={1} >
-        <Image source={connectIcon} style={styles.drawerItemIcon} />
-        <Text style={styles.drawerItemText}
-          >
-          Connect
-        </Text>
-    </TouchableOpacity>
       <TouchableOpacity style={styles.drawerItem}
       onPress={this.logout}
         activeOpacity={1} >
