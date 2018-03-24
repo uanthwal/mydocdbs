@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
-import createStore from './Redux'
+import createStore from './redux'
 /*
 * Both of the following files work for react-navigation
 * Routes will always be added and supported by modifying
@@ -15,7 +15,7 @@ import createStore from './Redux'
 */
 
 // We're going to use navigation with redux
-import ReduxNavigation from './Navigation/ReduxNavigation'
+import ReduxNavigation from './navigation/ReduxNavigation'
 
 // create our store
 const store = createStore()

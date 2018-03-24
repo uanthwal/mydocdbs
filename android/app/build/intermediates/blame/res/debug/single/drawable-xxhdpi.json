@@ -116,12 +116,12 @@
         "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\drawable-xxhdpi\\abc_popup_background_mtrl_mult.9.png"
     },
     {
-        "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\abc_list_pressed_holo_dark.9.png",
-        "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\drawable-xxhdpi\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
         "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\drawable-xxhdpi\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\abc_list_pressed_holo_dark.9.png",
+        "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\drawable-xxhdpi\\abc_list_pressed_holo_dark.9.png"
     },
     {
         "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi\\node_modules_reactnavigation_src_views_assets_backicon.png",

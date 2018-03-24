@@ -1,24 +1,28 @@
 import React from "react";
-import { Text, Animated, Easing, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  Animated,
+  Easing,
+  Image,
+  TouchableHighlight
+} from "react-native";
 import { StackNavigator, DrawerNavigator } from "react-navigation";
-import LoginScreen from "../Containers/Login/LoginScreen";
-import SignupScreen from "../Containers/Signup/SignUp";
-import ForgottenPasswordScreen from "../Containers/ForgottenPasswordScreen";
-import HomeScreen from "../Containers/Home/Home";
-import ProfileScreen from "../Containers/Profile/Profile";
-import RatingScreen from "../Containers/Rating/Rating";
-import AboutScreen from "../Containers/About/About";
-import ScanUploadScreen from "../Containers/ScanUpload/ScanUploadScreen";
-import AddPatientScreen from "../Containers/Patient/AddPatient";
-import DoctorConnectScreen from "../Containers/DoctorConnect/DoctorConnect";
+import LoginScreen from "../components/Login/LoginScreen";
+import SignupScreen from "../components/Signup/SignUp";
+import ForgottenPasswordScreen from "../components/ForgottenPasswordScreen";
+import HomeScreen from "../components/Home/Home";
+import ProfileScreen from "../components/Profile/Profile";
+import RatingScreen from "../components/Rating/Rating";
+import AboutScreen from "../components/About/About";
+import ScanUploadScreen from "../components/ScanUpload/ScanUploadScreen";
+import AddPatientScreen from "../components/Patient/AddPatient";
+import DoctorConnectScreen from "../components/DoctorConnect/DoctorConnect";
 
-import Screen2 from "../Containers/Screen2";
-import Screen3 from "../Containers/Screen3";
-import DrawerContainer from "../Containers/DrawerContainer";
+import DrawerContainer from "../components/DrawerContainer";
 import { appThemeColor } from "../AppGlobalConfig";
 
-import menuIcon from "../Images/menu.png";
-import DoctorSearchScreen from "../Containers/Search/SearchDoctorScreen";
+import menuIcon from "../images/menu.png";
+import DoctorSearchScreen from "../components/Search/SearchDoctorScreen";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -35,10 +39,6 @@ const DrawerStack = DrawerNavigator(
     profilescreen: { screen: ProfileScreen, headerMode: "float" },
     ratingscreen: { screen: RatingScreen, headerMode: "float" },
     aboutscreen: { screen: AboutScreen, headerMode: "float" }
-    // doctorconnectscreen: {
-    //   screen: DoctorConnectScreen,
-    //   navigationOptions: { title: "Connect to Doctor" }
-    // },
   },
   {
     gesturesEnabled: false,
@@ -47,7 +47,7 @@ const DrawerStack = DrawerNavigator(
 );
 
 const drawerButton = navigation => (
-  <TouchableOpacity
+  <TouchableHighlight
     onPress={() => {
       if (navigation.state.index === 0) {
         navigation.navigate("DrawerOpen");
@@ -55,10 +55,10 @@ const drawerButton = navigation => (
         navigation.navigate("DrawerClose");
       }
     }}
-    activeOpacity={1}
+    underlayColor={appThemeColor.highLightColor}
   >
     <Image source={menuIcon} style={{ height: 35, width: 35, marginLeft: 8 }} />
-  </TouchableOpacity>
+  </TouchableHighlight>
 );
 
 const DrawerNavigation = StackNavigator(
@@ -83,11 +83,25 @@ const LoginStack = StackNavigator(
     loginScreen: { screen: LoginScreen },
     signupScreen: {
       screen: SignupScreen,
-      navigationOptions: { title: "Create Account" }
+      navigationOptions: {
+        title: "Create Account",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
     },
     forgottenPasswordScreen: {
       screen: ForgottenPasswordScreen,
-      navigationOptions: { title: "Forgot Password" }
+      navigationOptions: {
+        title: "Forgot Password",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
     }
   },
   {
@@ -152,12 +166,12 @@ const PrimaryNav = StackNavigator(
   {
     loginStack: { screen: LoginStack },
     drawerStack: { screen: DrawerNavigation },
-    homeStack: { screen: HomeStack }
+    homeStack: { screen: HomeStack },
+    // doctorconnectscreen: {screen: DoctorConnectScreen}
   },
   {
     // Default config for all screens
     headerMode: "none",
-    // title: "Main",
     initialRouteName: "loginStack",
     transitionConfig: noTransitionConfig
   }
