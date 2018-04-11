@@ -10,7 +10,8 @@ import {
   View,
   TextInput,
   AsyncStorage,
-  Keyboard
+  Keyboard,
+  Platform
 } from "react-native";
 import { appThemeColor } from "../../AppGlobalConfig";
 import Dimensions from "Dimensions";
@@ -22,37 +23,39 @@ import { appMessages } from "../../AppGlobalMessages";
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
+const storageServices = require("../Shared/Storage.js");
 
 export default class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       username: "",
       password: ""
     };
     const nav = this.props.nav;
     this._onClickLoginBtn = this._onClickLoginBtn.bind(this);
     console.ignoredYellowBox = ["Setting a timer"];
-    AsyncStorage.getItem("loggedInUserId")
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    let loggedInUserIdPromise = storageServices.read("loggedInUserId");
+    loggedInUserIdPromise
       .then(value => {
         this.setState({ isLoading: false });
         if (value != null) {
           //User is logged in
+          // console.log("User logged in, ID: ", value);
           this.props.navigation.navigate("drawerStack");
+        } else {
+          console.log("User not logged in");
         }
       })
       .catch(error => {
-        console.log("Error while getting loggedInUserInfo", error);
+        this.setState({ isLoading: false });
+        console.log("LoginScreen: Error while getting loggedInUserInfo", error);
       });
-  }
-
-  async setUserId(value) {
-    try {
-      AsyncStorage.setItem("loggedInUserId", value);
-    } catch (error) {
-      // console.log("Error saving data" + error);
-    }
   }
 
   displayAlert(title, message) {
@@ -86,27 +89,30 @@ export default class LoginScreen extends Component {
     }
 
     let payload = {
-      // mobileNumber: this.state.username,
-      // password: this.state.password,
-      mobileNumber: "123456789",
-      password: "password123"
+      mobileNumber: this.state.username,
+      password: this.state.password,
+      // mobileNumber: "8886309997",
+      // password: "Test@123",
+      // emailId: "uanthwal@gmail.com"
     };
 
     this.setState({ isLoading: true });
 
     login(payload)
       .then(responseData => {
+        // console.log("Login API Payload: ", payload);
         // console.log("Login API Response: ", responseData);
+        this.setState({ isLoading: false });
         if (responseData.code == 0) {
-          this.setUserId("" + responseData.data);
+          AsyncStorage.clear();
+          storageServices.save("loggedInUserId", payload.mobileNumber);
           this.props.navigation.navigate("drawerStack");
         } else {
           this.displayAlert("Invalid Credentials", appMessages.invalidCreds);
         }
-        this.setState({ isLoading: false });
       })
       .catch(error => {
-        // console.log("Login API Response Error: ", error);
+        console.log("Login API Response Error: ", error);
         this.displayAlert("Network Error", appMessages.networkErr);
         this.setState({ isLoading: false });
       });

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "567948618396",
+    "firebase_url": "https://mydoc-194514.firebaseio.com",
+    "project_id": "mydoc-194514",
+    "storage_bucket": "mydoc-194514.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567948618396:android:788199df3d760802",
+        "android_client_info": {
+          "package_name": "com.mydocdbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567948618396-huhhifur5flp2uvvtkadgs9m2ip45tgr.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "567948618396-h97ji1nkq904us1om4fthi6tdp07ofop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqUA-47L3ZZ7jKkTAs7deoP26U3nLSNXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,13 +3,14 @@ package com.mydocdbs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.oney.WebRTCModule.WebRTCModulePackage;
+import com.evollu.react.fcm.FIRMessagingPackage;
 import com.zxcpoiu.incallmanager.InCallManagerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.oney.WebRTCModule.WebRTCModulePackage;
+import in.sriraman.sharedpreferences.RNSharedPreferencesReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new WebRTCModulePackage(),
-            new InCallManagerPackage()
+          new FIRMessagingPackage(),
+          new WebRTCModulePackage(),
+          new InCallManagerPackage(),
+          new RNSharedPreferencesReactPackage()
       );
     }
 

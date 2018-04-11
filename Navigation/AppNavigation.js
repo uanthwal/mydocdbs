@@ -23,6 +23,10 @@ import { appThemeColor } from "../AppGlobalConfig";
 
 import menuIcon from "../images/menu.png";
 import DoctorSearchScreen from "../components/Search/SearchDoctorScreen";
+import IncomingCallScreen from "../components/DoctorConnect/IncomingCallScreen";
+import OutgoingCallScreen from "../components/DoctorConnect/OutgoingCallScreen";
+import DoctorSpecialityScreen from "../components/Speciality/SpecialityScreen";
+import ChatScreen from "../components/Chat/ChatScreen";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -69,7 +73,7 @@ const DrawerNavigation = StackNavigator(
     headerMode: "screen",
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: appThemeColor.btnBgColor, marginLeft: 0 },
-      title: "MyDoc",
+      title: "EzDoc",
       headerTintColor: "white",
       gesturesEnabled: false,
       headerLeft: drawerButton(navigation)
@@ -142,7 +146,51 @@ const HomeStack = StackNavigator(
     doctorsearchscreen: {
       screen: DoctorSearchScreen,
       navigationOptions: {
-        title: "Search Doctor",
+        title: "Doctors",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    incomingcallscreen: {
+      screen: IncomingCallScreen,
+      navigationOptions: {
+        title: "Call",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    outgoingcallscreen: {
+      screen: OutgoingCallScreen,
+      navigationOptions: {
+        title: "Call",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    chatscreen: {
+      screen: ChatScreen,
+      navigationOptions: {
+        title: "Smart Assitant",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    specializationscreen: {
+      screen: DoctorSpecialityScreen,
+      navigationOptions: {
+        title: "Categories",
         headerTitleStyle: {
           flex: 1,
           textAlign: "center"
@@ -166,8 +214,8 @@ const PrimaryNav = StackNavigator(
   {
     loginStack: { screen: LoginStack },
     drawerStack: { screen: DrawerNavigation },
-    homeStack: { screen: HomeStack },
-    // doctorconnectscreen: {screen: DoctorConnectScreen}
+    homeStack: { screen: HomeStack }
+    // chatscreen: {screen: ChatScreen}
   },
   {
     // Default config for all screens

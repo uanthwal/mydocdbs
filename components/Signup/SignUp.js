@@ -8,23 +8,29 @@ import {
   TextInput,
   ScrollView,
   BackHandler,
-  Keyboard
+  Keyboard,
+  AsyncStorage,
+  Picker
 } from "react-native";
 import LoadingIndicator from "../Shared/LoadingIndicator";
 import { appThemeColor } from "../../AppGlobalConfig";
 import Dimensions from "Dimensions";
 import { URL_CONFIG } from "../../AppUrlConfig";
 import { registerUser } from "../../AppGlobalAPIs";
+import PushNotification from "../PushNotification/PushNotification";
+import { appMessages } from "../../AppGlobalMessages";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
 const DEVICE_HEIGHT = Dimensions.get("window").height;
 const MARGIN = 40;
-
+const storageServices = require("../Shared/Storage.js");
 export default class SignupScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false
+      isLoading: false,
+      notificationToken: "",
+      specialization: ""
     };
 
     this._onClickSave = this._onClickSave.bind(this);
@@ -78,6 +84,14 @@ export default class SignupScreen extends Component {
 
   _onClickSave() {
     Keyboard.dismiss();
+    let tokenPromise = storageServices.read("notificationToken");
+    tokenPromise.then(tokenValue => {
+      this._registerUser(tokenValue);
+    });
+  }
+
+  _registerUser(token) {
+    // console.log("PushNotification Token: ", token);
     if (this.state.isLoading) return;
 
     let firstName =
@@ -100,7 +114,9 @@ export default class SignupScreen extends Component {
       !password ||
       !mobileNumber ||
       !userId ||
-      mobileNumber.length != 10
+      mobileNumber.length != 10 ||
+      this.state.userRole == -1 ||
+      (this.state.userRole == "doc" && this.state.specialization == -1)
     ) {
       this.displayAlert(
         "failed",
@@ -109,28 +125,42 @@ export default class SignupScreen extends Component {
       );
       return;
     }
+    if (token == "" || token == null) {
+      this.displayAlert(
+        "failed",
+        "Registration Token Issue",
+        "FCM issue, please contact administrator!!"
+      );
+      return;
+    }
     this.setState({ isLoading: true });
     let payload = {
       firstName: firstName,
       lastName: lastName,
-      password: lastName,
+      password: password,
       emailId: email,
       mobileNumber: mobileNumber,
       userType: this.state.userRole,
-      practiceId: userId
+      practiceId: userId,
+      notificationId: token,
+      specialization: this.state.specialization,
+      age: 10,
+      gender: "M"
     };
 
     registerUser(payload)
       .then(responseData => {
+        // console.log("Register user API Payload: ", payload);
         // console.log("Register user API Response: ", responseData);
-        if (responseJson.code == 0) {
+        // console.log("Register user API Response Code: ", responseData.code);
+        if (responseData.code == 0) {
           this.displayAlert(
             "success",
             "Success",
             "User registered successfully!!"
           );
         } else {
-          this.displayAlert("failed", "Failed", "Failed to register user!!");
+          this.displayAlert("failed", "Failed", responseData.description);
         }
         //console.log(responseJson);
         this.setState({ isLoading: false });
@@ -149,6 +179,7 @@ export default class SignupScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.scrollView} keyboardShouldPersistTaps="handled">
+        <PushNotification />
         {this.state.isLoading ? <LoadingIndicator /> : null}
         <View
           style={styles.ipWrapper}
@@ -227,7 +258,7 @@ export default class SignupScreen extends Component {
             onChangeText={text => this.setState({ mobileNumber: text })}
           />
         </View>
-        <View style={styles.roleView}>
+        {/* <View style={styles.roleView}>
           <Text style={styles.roleTextHeader}>Select Role: </Text>
           <TouchableOpacity
             onPress={() => this.onClickUserRole("healthworker")}
@@ -255,7 +286,43 @@ export default class SignupScreen extends Component {
               <Text style={styles.radioLabel}>Doctor</Text>
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
+
+        <Picker
+          style={[styles.input, styles.rolesPicker]}
+          selectedValue={this.state.userRole}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ userRole: itemValue, specialization: -1 })
+          }
+        >
+          <Picker.Item label="Select Role" value="-1" />
+          <Picker.Item label="Health Worker" value="hw" />
+          <Picker.Item label="Doctor" value="doc" />
+        </Picker>
+        <Picker
+          enabled={this.state.userRole == "hw" ? false : true}
+          style={[
+            styles.input,
+            styles.specialityPicker,
+            this.state.userRole == "hw" ? styles.disabledPicker : null
+          ]}
+          selectedValue={this.state.specialization}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ specialization: itemValue })
+          }
+        >
+          <Picker.Item label="Select Speciality" value="-1" />
+          <Picker.Item label="General" value="GENERAL" />
+          <Picker.Item label="Internal Medicine" value="INTERNAL_MEDICINE" />
+          <Picker.Item label="Dental Care" value="DENTAL_CARE" />
+          <Picker.Item label="Dermatology" value="DERMATALOGY" />
+          <Picker.Item label="Endocrinology" value="ENDOCRINOLOGY" />
+          <Picker.Item label="ENT" value="ENT" />
+          <Picker.Item label="Gynaecology" value="GYNAECOLOGY" />
+          <Picker.Item label="Rheumatology" value="RHEUMATOLOGY" />
+          <Picker.Item label="Physcology" value="PHYSCOLOGY" />
+          <Picker.Item label="Sexology" value="SEXOLOGY" />
+        </Picker>
 
         <View style={[styles.actionbtn, styles.container]}>
           <TouchableOpacity
@@ -326,7 +393,7 @@ const styles = StyleSheet.create({
     height: DEVICE_HEIGHT,
     backgroundColor: appThemeColor.screenBgColor
   },
-  roleView: {
+  rolesPicker: {
     marginTop: 10,
     marginHorizontal: 20,
     paddingLeft: 20,
@@ -336,36 +403,17 @@ const styles = StyleSheet.create({
     backgroundColor: appThemeColor.ipBgColor,
     width: DEVICE_WIDTH - 40
   },
-  roleTextHeader: {
-    color: appThemeColor.textColorWhite,
+  specialityPicker: {
+    marginTop: 20,
+    marginHorizontal: 20,
+    paddingLeft: 20,
     paddingTop: 5,
     paddingBottom: 5,
-    flex: 1,
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "center"
+    borderRadius: 4,
+    backgroundColor: appThemeColor.ipBgColor,
+    width: DEVICE_WIDTH - 40
   },
-  roleText: {
-    color: appThemeColor.textColorWhite,
-    paddingLeft: 10
-  },
-  radioOuter: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: "#9eacb4",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  radioInner: {
-    height: 12,
-    width: 12,
-    borderRadius: 6,
-    backgroundColor: "#ffffff"
-  },
-  radioLabel: {
-    color: "white",
-    paddingLeft: 5
+  disabledPicker: {
+    backgroundColor: "#C7CCD1"
   }
 });

@@ -8,7 +8,7 @@ export var appThemeColor = {
     btnTextColor: 'white',
     textColorWhite:'white',
     separatorColor: '#32c24d',
-    highLightColor: '#fe4c4c'
+    highLightColor: "#f8f8f8"
 };
 
 // color: '#32c24d',

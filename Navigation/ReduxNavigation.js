@@ -7,6 +7,13 @@ import {
   createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 // here is our redux-aware our smart component
+import FCM from "react-native-fcm";
+const storageServices = require("../components/Shared/Storage.js");
+
+// FCM.getInitialNotification().then(notif => {
+//   console.log("Notification Received in getInitialNotification redu: ", notif);
+// });
+
 const middleware = createReactNavigationReduxMiddleware(
   "root",
   state => state.nav,

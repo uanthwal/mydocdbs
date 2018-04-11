@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_notif.png",
+        "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_notif.png"
+    },
+    {
         "merged": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi\\ic_launcher.png",
         "source": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }

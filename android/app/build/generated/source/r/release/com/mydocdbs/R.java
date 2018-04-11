@@ -1811,22 +1811,22 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f02003c;
         public static final int abc_textfield_search_material=0x7f02003d;
         public static final int images_aboutus=0x7f02003e;
-        public static final int images_callend=0x7f02003f;
-        public static final int images_camera=0x7f020040;
-        public static final int images_eye_black=0x7f020041;
-        public static final int images_home=0x7f020042;
-        public static final int images_icon_chatbot=0x7f020043;
-        public static final int images_icon_connect=0x7f020044;
-        public static final int images_icon_history=0x7f020045;
-        public static final int images_icon_notifications=0x7f020046;
-        public static final int images_icon_patient=0x7f020047;
-        public static final int images_icon_reports=0x7f020048;
-        public static final int images_icon_search_doctor=0x7f020049;
-        public static final int images_icon_search_patient=0x7f02004a;
-        public static final int images_icon_upload=0x7f02004b;
-        public static final int images_img_0187=0x7f02004c;
-        public static final int images_loader_new=0x7f02004d;
-        public static final int images_loading=0x7f02004e;
+        public static final int images_answercallwhite=0x7f02003f;
+        public static final int images_callend=0x7f020040;
+        public static final int images_callendwhite=0x7f020041;
+        public static final int images_callinguser=0x7f020042;
+        public static final int images_camera=0x7f020043;
+        public static final int images_home=0x7f020044;
+        public static final int images_icon_chatbot=0x7f020045;
+        public static final int images_icon_connect=0x7f020046;
+        public static final int images_icon_history=0x7f020047;
+        public static final int images_icon_notifications=0x7f020048;
+        public static final int images_icon_patient=0x7f020049;
+        public static final int images_icon_reports=0x7f02004a;
+        public static final int images_icon_search_doctor=0x7f02004b;
+        public static final int images_icon_search_patient=0x7f02004c;
+        public static final int images_icon_upload=0x7f02004d;
+        public static final int images_img_0187=0x7f02004e;
         public static final int images_logo=0x7f02004f;
         public static final int images_logout=0x7f020050;
         public static final int images_makecall=0x7f020051;
@@ -1836,12 +1836,22 @@ containing a value of this type.
         public static final int images_password=0x7f020055;
         public static final int images_profile=0x7f020056;
         public static final int images_rateus=0x7f020057;
-        public static final int images_username=0x7f020058;
-        public static final int images_videocall=0x7f020059;
-        public static final int images_wallpaper=0x7f02005a;
-        public static final int node_modules_reactnavigation_src_views_assets_backicon=0x7f02005b;
-        public static final int node_modules_reactnavigation_src_views_assets_backiconmask=0x7f02005c;
-        public static final int notification_template_icon_bg=0x7f02005d;
+        public static final int images_sendmessage=0x7f020058;
+        public static final int images_sendmessagedisabled=0x7f020059;
+        public static final int images_specialization_dental_care=0x7f02005a;
+        public static final int images_specialization_dermatology=0x7f02005b;
+        public static final int images_specialization_endocrinology=0x7f02005c;
+        public static final int images_specialization_ent=0x7f02005d;
+        public static final int images_specialization_general=0x7f02005e;
+        public static final int images_specialization_gynaecology=0x7f02005f;
+        public static final int images_specialization_internal=0x7f020060;
+        public static final int images_specialization_rheumatology=0x7f020061;
+        public static final int images_specialization_sexology=0x7f020062;
+        public static final int images_username=0x7f020063;
+        public static final int images_videocall=0x7f020064;
+        public static final int node_modules_reactnavigation_src_views_assets_backicon=0x7f020065;
+        public static final int node_modules_reactnavigation_src_views_assets_backiconmask=0x7f020066;
+        public static final int notification_template_icon_bg=0x7f020067;
     }
     public static final class id {
         public static final int action0=0x7f0d0058;
@@ -1962,7 +1972,8 @@ containing a value of this type.
         public static final int abc_config_activityShortDur=0x7f0b0002;
         public static final int abc_max_action_buttons=0x7f0b0000;
         public static final int cancel_button_image_alpha=0x7f0b0003;
-        public static final int status_bar_notification_info_maxnum=0x7f0b0004;
+        public static final int google_play_services_version=0x7f0b0004;
+        public static final int status_bar_notification_info_maxnum=0x7f0b0005;
     }
     public static final class layout {
         public static final int abc_action_bar_title_item=0x7f040000;
@@ -2009,6 +2020,7 @@ containing a value of this type.
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
+        public static final int ic_notif=0x7f030001;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f070000;
@@ -2028,32 +2040,41 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with=0x7f07000e;
         public static final int abc_shareactionprovider_share_with_application=0x7f07000f;
         public static final int abc_toolbar_collapse_description=0x7f070010;
-        public static final int app_name=0x7f070012;
-        public static final int catalyst_copy_button=0x7f070013;
-        public static final int catalyst_debugjs=0x7f070014;
-        public static final int catalyst_debugjs_nuclide=0x7f070015;
-        public static final int catalyst_debugjs_nuclide_failure=0x7f070016;
-        public static final int catalyst_debugjs_off=0x7f070017;
-        public static final int catalyst_dismiss_button=0x7f070018;
-        public static final int catalyst_element_inspector=0x7f070019;
-        public static final int catalyst_heap_capture=0x7f07001a;
-        public static final int catalyst_hot_module_replacement=0x7f07001b;
-        public static final int catalyst_hot_module_replacement_off=0x7f07001c;
-        public static final int catalyst_jsload_error=0x7f07001d;
-        public static final int catalyst_live_reload=0x7f07001e;
-        public static final int catalyst_live_reload_off=0x7f07001f;
-        public static final int catalyst_loading_from_url=0x7f070020;
-        public static final int catalyst_perf_monitor=0x7f070021;
-        public static final int catalyst_perf_monitor_off=0x7f070022;
-        public static final int catalyst_poke_sampling_profiler=0x7f070023;
-        public static final int catalyst_reload_button=0x7f070024;
-        public static final int catalyst_reloadjs=0x7f070025;
-        public static final int catalyst_remotedbg_error=0x7f070026;
-        public static final int catalyst_remotedbg_message=0x7f070027;
-        public static final int catalyst_report_button=0x7f070028;
-        public static final int catalyst_settings=0x7f070029;
-        public static final int catalyst_settings_title=0x7f07002a;
-        public static final int status_bar_notification_info_overflow=0x7f070011;
+        public static final int app_name=0x7f070013;
+        public static final int catalyst_copy_button=0x7f070014;
+        public static final int catalyst_debugjs=0x7f070015;
+        public static final int catalyst_debugjs_nuclide=0x7f070016;
+        public static final int catalyst_debugjs_nuclide_failure=0x7f070017;
+        public static final int catalyst_debugjs_off=0x7f070018;
+        public static final int catalyst_dismiss_button=0x7f070019;
+        public static final int catalyst_element_inspector=0x7f07001a;
+        public static final int catalyst_heap_capture=0x7f07001b;
+        public static final int catalyst_hot_module_replacement=0x7f07001c;
+        public static final int catalyst_hot_module_replacement_off=0x7f07001d;
+        public static final int catalyst_jsload_error=0x7f07001e;
+        public static final int catalyst_live_reload=0x7f07001f;
+        public static final int catalyst_live_reload_off=0x7f070020;
+        public static final int catalyst_loading_from_url=0x7f070021;
+        public static final int catalyst_perf_monitor=0x7f070022;
+        public static final int catalyst_perf_monitor_off=0x7f070023;
+        public static final int catalyst_poke_sampling_profiler=0x7f070024;
+        public static final int catalyst_reload_button=0x7f070025;
+        public static final int catalyst_reloadjs=0x7f070026;
+        public static final int catalyst_remotedbg_error=0x7f070027;
+        public static final int catalyst_remotedbg_message=0x7f070028;
+        public static final int catalyst_report_button=0x7f070029;
+        public static final int catalyst_settings=0x7f07002a;
+        public static final int catalyst_settings_title=0x7f07002b;
+        public static final int common_google_play_services_unknown_issue=0x7f070011;
+        public static final int default_web_client_id=0x7f07002c;
+        public static final int fcm_fallback_notification_channel_label=0x7f07002d;
+        public static final int firebase_database_url=0x7f07002e;
+        public static final int gcm_defaultSenderId=0x7f07002f;
+        public static final int google_api_key=0x7f070030;
+        public static final int google_app_id=0x7f070031;
+        public static final int google_crash_reporting_api_key=0x7f070032;
+        public static final int google_storage_bucket=0x7f070033;
+        public static final int status_bar_notification_info_overflow=0x7f070012;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f09007a;

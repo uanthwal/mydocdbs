@@ -20,7 +20,6 @@ import ReduxNavigation from './navigation/ReduxNavigation'
 // create our store
 const store = createStore()
 
-
 export default class App extends React.Component {
   render() {
     return (

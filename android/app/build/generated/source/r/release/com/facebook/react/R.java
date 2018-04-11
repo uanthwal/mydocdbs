@@ -476,7 +476,7 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f02003b;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f02003c;
 		public static final int abc_textfield_search_material = 0x7f02003d;
-		public static final int notification_template_icon_bg = 0x7f02005d;
+		public static final int notification_template_icon_bg = 0x7f020067;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0d0058;
@@ -597,7 +597,7 @@ public final class R {
 		public static final int abc_config_activityShortDur = 0x7f0b0002;
 		public static final int abc_max_action_buttons = 0x7f0b0000;
 		public static final int cancel_button_image_alpha = 0x7f0b0003;
-		public static final int status_bar_notification_info_maxnum = 0x7f0b0004;
+		public static final int status_bar_notification_info_maxnum = 0x7f0b0005;
 	}
 	public static final class layout {
 		public static final int abc_action_bar_title_item = 0x7f040000;
@@ -660,31 +660,31 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with = 0x7f07000e;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f07000f;
 		public static final int abc_toolbar_collapse_description = 0x7f070010;
-		public static final int catalyst_copy_button = 0x7f070013;
-		public static final int catalyst_debugjs = 0x7f070014;
-		public static final int catalyst_debugjs_nuclide = 0x7f070015;
-		public static final int catalyst_debugjs_nuclide_failure = 0x7f070016;
-		public static final int catalyst_debugjs_off = 0x7f070017;
-		public static final int catalyst_dismiss_button = 0x7f070018;
-		public static final int catalyst_element_inspector = 0x7f070019;
-		public static final int catalyst_heap_capture = 0x7f07001a;
-		public static final int catalyst_hot_module_replacement = 0x7f07001b;
-		public static final int catalyst_hot_module_replacement_off = 0x7f07001c;
-		public static final int catalyst_jsload_error = 0x7f07001d;
-		public static final int catalyst_live_reload = 0x7f07001e;
-		public static final int catalyst_live_reload_off = 0x7f07001f;
-		public static final int catalyst_loading_from_url = 0x7f070020;
-		public static final int catalyst_perf_monitor = 0x7f070021;
-		public static final int catalyst_perf_monitor_off = 0x7f070022;
-		public static final int catalyst_poke_sampling_profiler = 0x7f070023;
-		public static final int catalyst_reload_button = 0x7f070024;
-		public static final int catalyst_reloadjs = 0x7f070025;
-		public static final int catalyst_remotedbg_error = 0x7f070026;
-		public static final int catalyst_remotedbg_message = 0x7f070027;
-		public static final int catalyst_report_button = 0x7f070028;
-		public static final int catalyst_settings = 0x7f070029;
-		public static final int catalyst_settings_title = 0x7f07002a;
-		public static final int status_bar_notification_info_overflow = 0x7f070011;
+		public static final int catalyst_copy_button = 0x7f070014;
+		public static final int catalyst_debugjs = 0x7f070015;
+		public static final int catalyst_debugjs_nuclide = 0x7f070016;
+		public static final int catalyst_debugjs_nuclide_failure = 0x7f070017;
+		public static final int catalyst_debugjs_off = 0x7f070018;
+		public static final int catalyst_dismiss_button = 0x7f070019;
+		public static final int catalyst_element_inspector = 0x7f07001a;
+		public static final int catalyst_heap_capture = 0x7f07001b;
+		public static final int catalyst_hot_module_replacement = 0x7f07001c;
+		public static final int catalyst_hot_module_replacement_off = 0x7f07001d;
+		public static final int catalyst_jsload_error = 0x7f07001e;
+		public static final int catalyst_live_reload = 0x7f07001f;
+		public static final int catalyst_live_reload_off = 0x7f070020;
+		public static final int catalyst_loading_from_url = 0x7f070021;
+		public static final int catalyst_perf_monitor = 0x7f070022;
+		public static final int catalyst_perf_monitor_off = 0x7f070023;
+		public static final int catalyst_poke_sampling_profiler = 0x7f070024;
+		public static final int catalyst_reload_button = 0x7f070025;
+		public static final int catalyst_reloadjs = 0x7f070026;
+		public static final int catalyst_remotedbg_error = 0x7f070027;
+		public static final int catalyst_remotedbg_message = 0x7f070028;
+		public static final int catalyst_report_button = 0x7f070029;
+		public static final int catalyst_settings = 0x7f07002a;
+		public static final int catalyst_settings_title = 0x7f07002b;
+		public static final int status_bar_notification_info_overflow = 0x7f070012;
 	}
 	public static final class style {
 		public static final int AlertDialog_AppCompat = 0x7f09007a;

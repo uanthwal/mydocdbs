@@ -4,13 +4,10 @@ import {
   Text,
   TouchableHighlight,
   View,
-  ListView,
   Image,
   TextInput,
   BackHandler,
-  Button,
-  Dimensions,
-  DeviceEventEmitter
+  Button
 } from "react-native";
 import { RTCView } from "react-native-webrtc";
 import Thumbnails from "./components/Thumbnails.js";
@@ -46,6 +43,7 @@ export default class DoctorScreen extends Component {
       callMuted: false,
       isFront: true
     };
+
     this.handleBackButton = this.handleBackButton.bind(this);
     this.handleCallEndClick = this.handleCallEndClick.bind(this);
     this.handleCameraSwitch = this.handleCameraSwitch.bind(this);
@@ -53,6 +51,11 @@ export default class DoctorScreen extends Component {
   }
 
   componentDidMount() {
+    console.log("--componentDidMount called--");
+    console.log(
+      "--this.props.navigation.state.params--",
+      this.props.navigation.state.params
+    );
     BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
     webRTCServices.getLocalStream(this.state.isFront, stream => {
       this.setState({
@@ -64,6 +67,13 @@ export default class DoctorScreen extends Component {
           }
         ]
       });
+      if (
+        this.props.navigation.state.params &&
+        this.props.navigation.state.params.callFrom
+      ) {
+        this.VIDEO_CONFERENCE_ROOM = this.props.navigation.state.params.callFrom;
+        this.handleJoinClick();
+      }
     });
   }
 

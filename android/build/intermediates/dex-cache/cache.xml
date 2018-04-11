@@ -3,12 +3,66 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\me.leolin\ShortcutBadger\1.1.17\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="248218f163235e6d2a81188eaa1db0ec61193055">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\me.leolin-ShortcutBadger-1.1.17_e86644abdb2b1a225807a5bf97567a052cf6f615.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-messaging\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f47f4d5bdfd7d7bf330945b8a7ccce4ab437a710">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-messaging-11.0.4_91d58cd42c6cba15692d42d60d6cc38cf6556dfd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\mydocdbs\react-native-shared-preferences\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c6cc85950a8218ce3d596abc0dfa53d83940b099">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\mydocdbs-react-native-shared-preferences-unspecified_c75b0b9fd565e26967ffb21ed62cd0574a6f9dd3.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_7813f470c718eb0c53fe4094ec013f0ddd827ca2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e5b429c146094a612134910688d169ec08deeefb">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-11.0.4_0cecb36e5bbfabd7b8fea058f95fbeeb45fedd6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_ad656d9a484dcd593fd634177d766a5d04434822.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\mydocdbs\react-native-fcm\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9687e13fe2741e2346d428f3eb7454f07c7164f8">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\mydocdbs-react-native-fcm-unspecified_7d3c801bbdb0f4cab0b9d50066a7de7bac952af4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -66,15 +120,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_b2997436ee2b63cb5fac91b83b2581e36169e1fc.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -84,12 +129,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.2.0_de42a32a6f1bc6d90fdd0fff4f6fa09c51e08dbc.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\mydocdbs\WebRTCModule\unspecified\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="5088b96697f59e510efef149f658de9636be512a">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\mydocdbs-WebRTCModule-unspecified_4a0ec7184436d20f4b0ebb5fbf4b8563db2a2536.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-iid-11.0.4_cbe0dc4903176dcc1e5a911e38a32385fbf04d42.jar" />
     </item>
     <item
         is-multidex="false"
@@ -108,15 +171,6 @@
         revision="23.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_ffa526af1b6786f9c797ec78b834063f01d961df.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.0.1_2c39099d5bc06b84aa4856260f85ab534db43f80.jar" />
     </item>
     <item
         is-multidex="false"
@@ -147,21 +201,21 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-impl-11.0.4_fd76549811aaba381a3ffb3ebf9c9b461edfa87a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\mydocdbs\WebRTCModule\unspecified\jars\libs\libwebrtc.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="81ee2a1f40c6ab3759edf66344ebb5a2b24ae99a">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\libwebrtc_23c883e49ed39bfcd2c13801d91addb9abc6382e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Roger\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1_50d4520bbdcdbe4976b0d2d8d809f1842494c437.jar" />
     </item>
     <item
         is-multidex="false"
@@ -174,6 +228,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-11.0.4_0999d45c6cc6e864aea04ab597be013a922c30bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.2.0_8c9c3d125b3a826ea608f5d5e93f74ae54710144.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Roger\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
         jumboMode="false"
         optimize="true"
@@ -183,12 +255,48 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_3da417251e0c0e10ddbf8ced4267f698d547681d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\mydocdbs\react-native-incall-manager\unspecified\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="1a97ba9465117142a39911f7f5e0bc1af00d5142">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\mydocdbs-react-native-incall-manager-unspecified_bcd98abf91c7ccd83cb77e42ce23d755b656b148.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.2.0_8438478af43e947e7d93fd59d8c6499b674e047c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-11.0.4_f8d7e6dd3a7498b025ab3fc09b108d0294512031.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.2.0_0b554bb207f4b1de409448ecca5cba55b116b7da.jar" />
     </item>
     <item
         is-multidex="false"
@@ -216,6 +324,24 @@
         revision="23.0.1"
         sha1="6975da39a7040257bd51d21a231b76c915872d38">
         <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\javax.inject-1_68f696fdcb517e0e102e5fe8fc162514735e8756.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-common-11.0.4_1c368f552be09fa49ecacf2810e4ab261409bb28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\Roger\Downloads\mydocdbs\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.2.0_5f3fffac7b28f2592a697056f93a17d58bdcbc1f.jar" />
     </item>
 
 </items>

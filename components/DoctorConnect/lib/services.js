@@ -23,6 +23,7 @@ if (IS_BROWSER) {
 
 let socket = null;
 let onFriendLeftCallback = null;
+let onCountFriendsCallback = null;
 let onFriendConnectedCallback = null;
 let onDataChannelMessageCallback = null;
 let onEndCall = null;
@@ -187,8 +188,7 @@ function leave(socketId) {
     // console.log("in leave peerConnections: ", peerConnections);
     var pc = peerConnections[socketId];
     //console.log("pc", peerConnections[socketId]);
-    if(pc)
-      pc.close();
+    if (pc) pc.close();
     delete peerConnections[socketId];
     if (onFriendLeftCallback != null) {
       onFriendLeftCallback(socketId);
@@ -229,8 +229,9 @@ function logError(error) {
 // Services
 function countFriends(roomId, callback) {
   socket.emit("count", roomId, count => {
-    //console.log("Count friends result: ", count);
-    callback(count);
+    console.log("Count friends result: roomId, count ", roomId, count);
+    console.log('callback in countFriends: ', callback);
+    callback.friendsCount(count);
   });
 }
 
@@ -310,6 +311,7 @@ function join(roomId, name, callbacks) {
   onFriendLeftCallback = callbacks.friendLeft;
   onFriendConnectedCallback = callbacks.friendConnected;
   onDataChannelMessageCallback = callbacks.dataChannelMessage;
+  onCountFriendsCallback = callbacks.friendsCount;
   //console.log("join method: scoket value: ", socket);
   socket.emit("join", { roomId, name }, function(result) {
     friends = result;

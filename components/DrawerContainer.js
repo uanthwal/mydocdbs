@@ -17,6 +17,8 @@ import homeIcon from "../images/home.png";
 import profileIcon from "../images/profile.png";
 import { appThemeColor } from "../AppGlobalConfig";
 
+const storageServices = require("./Shared/Storage.js");
+
 export default class DrawerContainer extends React.Component {
   logout = () => {
     const actionToDispatch = NavigationActions.reset({
@@ -25,6 +27,7 @@ export default class DrawerContainer extends React.Component {
       actions: [NavigationActions.navigate({ routeName: "loginStack" })]
     });
     AsyncStorage.clear();
+    storageServices.clear()
     this.props.navigation.dispatch(actionToDispatch);
   };
 
@@ -93,11 +96,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   drawerItemIcon: {
-    height: 40,
-    width: 40
+    height: 35,
+    width: 35
   },
   drawerItemText: {
     marginLeft: 8,
-    fontSize: 20
+    fontSize: 19
   }
 });
