@@ -11,13 +11,32 @@
                     "endOffset": 319
                 },
                 "from": {
-                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.0.4\\res\\values-ml\\values.xml",
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.8.0\\res\\values-ml\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 285,
+                        "startOffset": 283,
                         "endColumn": 218,
-                        "endOffset": 503
+                        "endOffset": 501
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 324,
+                    "endColumn": 102,
+                    "endOffset": 422
+                },
+                "from": {
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.firebase\\firebase-messaging\\11.8.0\\res\\values-ml\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 0,
+                        "startOffset": 241,
+                        "endColumn": 98,
+                        "endOffset": 339
                     }
                 }
             }

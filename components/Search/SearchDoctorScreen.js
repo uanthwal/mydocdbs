@@ -18,6 +18,7 @@ import { URL_CONFIG } from "../../AppUrlConfig";
 import { appThemeColor } from "../../AppGlobalConfig";
 import videoCallIcon from "../../images/make-call.png";
 import LoadingIndicator from "../Shared/LoadingIndicator";
+import { getUserConsultations } from "../../AppGlobalAPIs";
 
 export default class DoctorSearchScreen extends Component {
   constructor(props) {
@@ -27,7 +28,6 @@ export default class DoctorSearchScreen extends Component {
       allDocData: [],
       isLoading: true
     };
-    this.doDocFilter = this.doDocFilter.bind(this);
     this.onClickSearchBtn = this.onClickSearchBtn.bind(this);
     this.handleBackButton = this.handleBackButton.bind(this);
   }
@@ -35,6 +35,7 @@ export default class DoctorSearchScreen extends Component {
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
     this.onClickSearchBtn();
+    this.getActiveConsultations();
   }
 
   componentWillUnmount() {
@@ -46,57 +47,104 @@ export default class DoctorSearchScreen extends Component {
     return true;
   }
 
-  onClickSearchBtn() {
-    this.setState({ isLoading: true });
-    fetch(
-      URL_CONFIG.SEARCH_DOCTOR +
-        this.props.navigation.state.params.specialization,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(response => response.json())
-      .then(responseJson => {
-        // console.log("Search criteria Reponse: ", responseJson);
-        if (this.props.navigation.state.params.specialization == "GENERAL") {
-          this.setState({
-            isLoading: false,
-            allDocData: [
-              {
-                firstName: "Dr. Sam",
-                lastName: "Son",
-                location: "Hyderabad",
-                mobileNumber: "9627517697",
-                fcmToken:
-                  "dddxEZP33Q0:APA91bFjuYZO4vkOwDioM1OjIsSrziwYCSt2XD71xFDvOdeBinTVs2wTwTPSTrsO5u6kB7VZNXlgLVV5utbYG4tb5yPUTrAPelGEoWKdgIhEITeoq9t3ZqPMhCmdnnJh8o8cuvb4M1wn"
-              },
-              {
-                firstName: "Dr. Mike",
-                lastName: "Clark",
-                location: "Hyderabad",
-                mobileNumber: "8886389997",
-                fcmToken:
-                  "eMH0Y_QV2ss:APA91bHz_9cL2h3U44pTe_1TLYq5KsN1Y0zmG7RYTxfqw2EJaVXTVgYXgJzyASkLpT8sFcWOPgdEfd8KMe-a4Gy8RixhwrlVcVkV1K8-a_SPB7jdolBmRLaSCorH4oPJXZDfYRjWpaBj"
-              }
-            ]
-          });
-        } else {
-          responseJson.forEach(element => {
-            element.fcmToken = element.notificationId
-          });
-          this.setState({ isLoading: false, allDocData: responseJson });
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  getActiveConsultations() {
+    let loggedInUserIdPromise = storageServices.readMultiple([
+      "loggedInUserId",
+      "auth-api-key",
+      "x-csrf-token"
+    ]);
+
+    loggedInUserPromise.then(value => {
+      let headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "auth-api-key": JSON.parse(value[1]),
+        "x-csrf-token": JSON.parse(value[2])
+      };
+      getUserConsultations(headers, JSON.parse(value[0]))
+        .then(responseData => {
+          console.log("getUserConsultations API Response: ", responseData);
+        })
+        .catch(error => {
+          console.log("getUserConsultations Response Error: ", error);
+        });
+    });
   }
 
-  doDocFilter() {}
+  onClickSearchBtn() {
+    this.setState({ isLoading: true });
+    setTimeout(_ => {
+      this.setState({
+        isLoading: false,
+        allDocData: [
+          {
+            firstName: "Dr. Sam",
+            lastName: "Son",
+            location: "Hyderabad",
+            mobileNumber: "9627517697",
+            fcmToken:
+              "dddxEZP33Q0:APA91bFjuYZO4vkOwDioM1OjIsSrziwYCSt2XD71xFDvOdeBinTVs2wTwTPSTrsO5u6kB7VZNXlgLVV5utbYG4tb5yPUTrAPelGEoWKdgIhEITeoq9t3ZqPMhCmdnnJh8o8cuvb4M1wn"
+          },
+          {
+            firstName: "Dr. Mike",
+            lastName: "Clark",
+            location: "Hyderabad",
+            mobileNumber: "8886389997",
+            fcmToken:
+              "eMH0Y_QV2ss:APA91bHz_9cL2h3U44pTe_1TLYq5KsN1Y0zmG7RYTxfqw2EJaVXTVgYXgJzyASkLpT8sFcWOPgdEfd8KMe-a4Gy8RixhwrlVcVkV1K8-a_SPB7jdolBmRLaSCorH4oPJXZDfYRjWpaBj"
+          }
+        ]
+      });
+    }, 2000);
+
+    // fetch(
+    //   URL_CONFIG.SEARCH_DOCTOR +
+    //     this.props.navigation.state.params.specialization,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     }
+    //   }
+    // )
+    //   .then(response => response.json())
+    //   .then(responseJson => {
+    //     // console.log("Search criteria Reponse: ", responseJson);
+    //     if (this.props.navigation.state.params.specialization == "GENERAL") {
+    //       this.setState({
+    //         isLoading: false,
+    //         allDocData: [
+    //           {
+    //             firstName: "Dr. Sam",
+    //             lastName: "Son",
+    //             location: "Hyderabad",
+    //             mobileNumber: "9627517697",
+    //             fcmToken:
+    //               "dddxEZP33Q0:APA91bFjuYZO4vkOwDioM1OjIsSrziwYCSt2XD71xFDvOdeBinTVs2wTwTPSTrsO5u6kB7VZNXlgLVV5utbYG4tb5yPUTrAPelGEoWKdgIhEITeoq9t3ZqPMhCmdnnJh8o8cuvb4M1wn"
+    //           },
+    //           {
+    //             firstName: "Dr. Mike",
+    //             lastName: "Clark",
+    //             location: "Hyderabad",
+    //             mobileNumber: "8886389997",
+    //             fcmToken:
+    //               "eMH0Y_QV2ss:APA91bHz_9cL2h3U44pTe_1TLYq5KsN1Y0zmG7RYTxfqw2EJaVXTVgYXgJzyASkLpT8sFcWOPgdEfd8KMe-a4Gy8RixhwrlVcVkV1K8-a_SPB7jdolBmRLaSCorH4oPJXZDfYRjWpaBj"
+    //           }
+    //         ]
+    //       });
+    //     } else {
+    //       responseJson.forEach(element => {
+    //         element.fcmToken = element.notificationId
+    //       });
+    //       this.setState({ isLoading: false, allDocData: responseJson });
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+  }
+
 
   render() {
     return (
@@ -147,9 +195,8 @@ class DoctorSearchDetailComponent extends Component {
   }
 
   onClickCallBtn(value) {
+
     let data = JSON.stringify(value);
-    // console.log('onClickCallBtn',value);
-    // console.log("Moving from Doctor screen to Outgoing: ", new Date());
     this.props.props.navigation.navigate("outgoingcallscreen", {
       userSelected: data
     });

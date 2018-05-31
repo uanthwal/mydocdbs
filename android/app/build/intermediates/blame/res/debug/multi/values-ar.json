@@ -330,17 +330,17 @@
                     "startLine": 19,
                     "startColumn": 4,
                     "startOffset": 1874,
-                    "endColumn": 189,
-                    "endOffset": 2059
+                    "endColumn": 188,
+                    "endOffset": 2058
                 },
                 "from": {
-                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.0.4\\res\\values-ar\\values.xml",
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.8.0\\res\\values-ar\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 285,
-                        "endColumn": 189,
-                        "endOffset": 474
+                        "startOffset": 283,
+                        "endColumn": 188,
+                        "endOffset": 471
                     }
                 }
             },
@@ -348,9 +348,28 @@
                 "to": {
                     "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 2064,
+                    "startOffset": 2063,
+                    "endColumn": 104,
+                    "endOffset": 2163
+                },
+                "from": {
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.firebase\\firebase-messaging\\11.8.0\\res\\values-ar\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 0,
+                        "startOffset": 241,
+                        "endColumn": 100,
+                        "endOffset": 341
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2168,
                     "endColumn": 100,
-                    "endOffset": 2160
+                    "endOffset": 2264
                 },
                 "from": {
                     "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-ar\\values-ar.xml",

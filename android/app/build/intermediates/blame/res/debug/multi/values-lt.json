@@ -334,13 +334,13 @@
                     "endOffset": 2157
                 },
                 "from": {
-                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.0.4\\res\\values-lt\\values.xml",
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\11.8.0\\res\\values-lt\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 0,
-                        "startOffset": 285,
+                        "startOffset": 283,
                         "endColumn": 217,
-                        "endOffset": 502
+                        "endOffset": 500
                     }
                 }
             },
@@ -349,8 +349,27 @@
                     "startLine": 20,
                     "startColumn": 4,
                     "startOffset": 2162,
+                    "endColumn": 105,
+                    "endOffset": 2263
+                },
+                "from": {
+                    "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.google.firebase\\firebase-messaging\\11.8.0\\res\\values-lt\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 0,
+                        "startOffset": 241,
+                        "endColumn": 101,
+                        "endOffset": 342
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2268,
                     "endColumn": 100,
-                    "endOffset": 2258
+                    "endOffset": 2364
                 },
                 "from": {
                     "file": "C:\\Users\\Roger\\Downloads\\mydocdbs\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-lt\\values-lt.xml",

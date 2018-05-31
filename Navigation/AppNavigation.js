@@ -197,6 +197,17 @@ const HomeStack = StackNavigator(
         },
         headerLeft: null
       }
+    },
+    scanuploadscreen: {
+      screen: ScanUploadScreen,
+      navigationOptions: {
+        title: "Categories",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
     }
   },
   {

@@ -92,26 +92,40 @@ export default class AddPatientScreen extends Component {
       gender: this.state.gender
     };
 
-    registerPatient(payload)
-      .then(responseData => {
-        // console.log("Add Patient API Response: ", responseData);
-        if (responseJson.code == 0) {
-          this.displayAlert(
-            "success",
-            "Success",
-            "User registered successfully!!"
-          );
-        } else {
-          this.displayAlert("failed", "Failed", "Failed to register user!!");
-        }
-        //console.log(responseJson);
-        this.setState({ isLoading: false });
-      })
-      .catch(error => {
-        // console.log("Add Patient Response Error: ", error);
-        this.displayAlert("Network Error", appMessages.networkErr);
-        this.setState({ isLoading: false });
-      });
+    let loggedInUserIdPromise = storageServices.readMultiple([
+      "loggedInUserId",
+      "auth-api-key",
+      "x-csrf-token"
+    ]);
+
+    loggedInUserPromise.then(value => {
+      let headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "auth-api-key": JSON.parse(value[1]),
+        "x-csrf-token": JSON.parse(value[2])
+      };
+      registerPatient(headers, payload)
+        .then(responseData => {
+          // console.log("Add Patient API Response: ", responseData);
+          if (responseJson.code == 0) {
+            this.displayAlert(
+              "success",
+              "Success",
+              "User registered successfully!!"
+            );
+          } else {
+            this.displayAlert("failed", "Failed", "Failed to register user!!");
+          }
+          //console.log(responseJson);
+          this.setState({ isLoading: false });
+        })
+        .catch(error => {
+          // console.log("Add Patient Response Error: ", error);
+          this.displayAlert("Network Error", appMessages.networkErr);
+          this.setState({ isLoading: false });
+        });
+    });
   }
 
   _onClickGender(data) {

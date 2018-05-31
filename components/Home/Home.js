@@ -235,7 +235,7 @@ export default class HomeScreen extends Component {
       {
         icon: require("../../images/icon/upload.png"),
         label: "Scan Upload",
-        page: ""
+        page: "scanuploadscreen"
       },
       {
         icon: require("../../images/icon/history.png"),

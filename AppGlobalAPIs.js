@@ -40,15 +40,22 @@ export function registerUser(data) {
     });
 }
 
-export async function registerPatient(data) {
+export function registerPatient(headers, data) {
   return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.ADD_PATIENT, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "auth-api-key": await storageServices.read("auth-api-key"),
-      "x-csrf-token": await storageServices.read("x-csrf-token")
-    },
+    headers: headers,
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
+export function getUserConsultations(headers, data) {
+  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + data, {
+    method: "GET",
+    headers: headers,
     body: JSON.stringify(data)
   })
     .then(response => response.json())
@@ -83,7 +90,7 @@ export function sendNotificationViaFCM(calleeToken, data) {
     body: JSON.stringify({
       to: calleeToken,
       data: {
-        testdata:'testdata',
+        testdata: "testdata",
         custom_notification: {
           target_screen: "doctorconnectscreen",
           notification_data: data,

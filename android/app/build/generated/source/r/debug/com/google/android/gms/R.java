@@ -35,7 +35,7 @@ public final class R {
 	}
 	public static final class string {
 		public static final int common_google_play_services_unknown_issue = 0x7f070011;
-		public static final int fcm_fallback_notification_channel_label = 0x7f07002d;
+		public static final int fcm_fallback_notification_channel_label = 0x7f070012;
 	}
 	public static final class style {
 	}
