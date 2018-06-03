@@ -27,6 +27,7 @@ import OutgoingCallScreen from "../components/DoctorConnect/OutgoingCallScreen";
 import DoctorSpecialityScreen from "../components/Speciality/SpecialityScreen";
 import ChatScreen from "../components/Chat/ChatScreen";
 import SearchPatient from "../components/Search/SearchPatient";
+import MyReports from "../components/MyReports/MyReports";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -212,6 +213,17 @@ const HomeStack = StackNavigator(
       screen: SearchPatient,
       navigationOptions: {
         title: "Search Patient",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    myreportsscreen: {
+      screen: MyReports,
+      navigationOptions: {
+        title: "My Reports",
         headerTitleStyle: {
           flex: 1,
           textAlign: "center"

@@ -22,6 +22,7 @@ import PDFView from "react-native-pdf-view";
 const storageServices = require("../Shared/Storage.js");
 import { getUserConsultations } from "../../AppGlobalAPIs";
 import { uploadAttachments } from "../../AppGlobalAPIs";
+import LoadingIndicator from "../Shared/LoadingIndicator";
 
 export default class ScanUploadScreen extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class ScanUploadScreen extends React.Component {
       attachments: [],
       displayAttachments: false,
       modalVisible: false,
+      isLoading: true,
       previewData: { data: null, type: null }
     };
     this.onClickAddAttachment = this.onClickAddAttachment.bind(this);
@@ -60,6 +62,7 @@ export default class ScanUploadScreen extends React.Component {
           .then(responseData => {
             console.log("getUserConsultations API Response: ", responseData);
             this.setState({ consultationData: responseData.data });
+            this.setState({ isLoading: false });
           })
           .catch(error => {
             console.log("getUserConsultations Response Error: ", error);
@@ -139,9 +142,9 @@ export default class ScanUploadScreen extends React.Component {
       } else {
         this.state.attachments.push({
           id: this.state.consultation + "_" + new Date().getTime(),
-          name: this.state.consultation + "_" + new Date().getTime(),
+          name: this.state.consultation + "_" + new Date().getTime() + ".jpeg",
           data: response.uri,
-          type: "image"
+          type: "image/jpeg"
         });
         this.setState({ displayAttachments: true });
       }
@@ -157,18 +160,24 @@ export default class ScanUploadScreen extends React.Component {
       } else if (response.error) {
         console.log("FilePickerManager Error: ", response.error);
       } else {
-        this.state.attachments.push({
-          id: this.state.consultation + "_" + new Date().getTime(),
-          name: this.state.consultation + "_" + new Date().getTime(),
-          data: response.path,
-          type: response.type
-        });
-        this.setState({ displayAttachments: true });
+        if (response.type == "application/pdf") {
+          this.state.attachments.push({
+            id: this.state.consultation + "_" + new Date().getTime(),
+            name: this.state.consultation + "_" + new Date().getTime() + ".pdf",
+            data: response.path,
+            type: response.type
+          });
+          this.setState({ displayAttachments: true });
+        }
       }
     });
   }
 
   onClickUploadBtn() {
+    if (this.state.consultation == -1 && this.state.attachments.length < 1) {
+      return;
+    }
+    this.setState({ isLoading: true });
     let loggedInUserIdPromise = storageServices.readMultiple([
       "loggedInUserId",
       "auth-api-key",
@@ -178,14 +187,27 @@ export default class ScanUploadScreen extends React.Component {
       .then(value => {
         let headers = {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           "auth-api-key": JSON.parse(value[1]),
           "x-csrf-token": JSON.parse(value[2])
         };
-        let payload = { consultationId: this.state.consultation };
+        console.log(this.state.attachments);
+        let filesData = [];
+        this.state.attachments.forEach(element => {
+          filesData.push({
+            uri: element["data"],
+            type: element["type"],
+            name: element["name"]
+          });
+        });
+        let payload = new FormData();
+        payload.append("files", filesData);
+        payload.append("consultationId", this.state.consultation);
         uploadAttachments(headers, payload)
           .then(response => {
             console.log(response);
+            this.setState({ isLoading: false });
+            this.setState({ consultation: "-1", attachments: [] });
           })
           .catch(error => {
             console.log("onClickUploadBtn Response Error: ", error);
@@ -199,15 +221,16 @@ export default class ScanUploadScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.isLoading ? <LoadingIndicator /> : null}
         <Modal
           animationType="slide"
-          transparent={true}
+          transparent={false}
           visible={this.state.modalVisible}
           onRequestClose={() => {
             this.onClickCloseModal();
           }}
         >
-          {this.state.previewData.type == "image" ? (
+          {this.state.previewData.type == "image/jpeg" ? (
             <View style={styles.containerView}>
               <View style={styles.imagePreviewModal}>
                 <Image
@@ -258,55 +281,66 @@ export default class ScanUploadScreen extends React.Component {
             );
           })}
         </Picker>
-        <View style={styles.attachmentsBlock}>
-          <View style={styles.attachmentsViewHdrLbl}>
-            <Text style={{ fontSize: 18 }}>Attachments: </Text>
-            <TouchableOpacity onPress={this.onClickAddAttachment.bind(this)}>
-              <Image
-                source={cameraAttachmentIcon}
-                style={styles.addAttachmentsIcon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.onClickAddFile.bind(this)}>
-              <Image
-                source={docAttachmentIcon}
-                style={styles.addAttachmentsIcon}
-              />
-            </TouchableOpacity>
-          </View>
-          {this.state.displayAttachments ? (
-            <View>
-              {this.state.attachments.map((prop, key) => {
-                return (
-                  <View key={key} style={styles.attachmentView}>
-                    <Text style={styles.attachmentNameLbl}>{prop.id}</Text>
-                    <TouchableOpacity
-                      onPress={this.onClickViewAttachment.bind(this, prop.id)}
-                    >
-                      <Image
-                        source={imgPreviewIcon}
-                        style={styles.addAttachmentsIcon}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={this.onClickRemoveAttachment.bind(this, prop.id)}
-                    >
-                      <Image
-                        source={imgDeleteIcon}
-                        style={styles.addAttachmentsIcon}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                );
-              })}
+        {this.state.consultation != -1 ? (
+          <View style={styles.attachmentsBlock}>
+            <View style={styles.attachmentsViewHdrLbl}>
+              <Text style={{ fontSize: 18 }}>Attachments: </Text>
+              <TouchableOpacity onPress={this.onClickAddAttachment.bind(this)}>
+                <Image
+                  source={cameraAttachmentIcon}
+                  style={styles.addAttachmentsIcon}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.onClickAddFile.bind(this)}>
+                <Image
+                  source={docAttachmentIcon}
+                  style={styles.addAttachmentsIcon}
+                />
+              </TouchableOpacity>
             </View>
-          ) : (
-            <Text>No attachments!!</Text>
-          )}
-        </View>
+            {this.state.displayAttachments ? (
+              <View>
+                {this.state.attachments.map((prop, key) => {
+                  return (
+                    <View key={key} style={styles.attachmentView}>
+                      <Text style={styles.attachmentNameLbl}>{prop.id}</Text>
+                      <TouchableOpacity
+                        onPress={this.onClickViewAttachment.bind(this, prop.id)}
+                      >
+                        <Image
+                          source={imgPreviewIcon}
+                          style={styles.addAttachmentsIcon}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={this.onClickRemoveAttachment.bind(
+                          this,
+                          prop.id
+                        )}
+                      >
+                        <Image
+                          source={imgDeleteIcon}
+                          style={styles.addAttachmentsIcon}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  );
+                })}
+              </View>
+            ) : (
+              <Text>No attachments!!</Text>
+            )}
+          </View>
+        ) : null}
+
         <TouchableOpacity
           onPress={this.onClickUploadBtn.bind(this)}
-          style={[styles.proceedBtnView, styles.enable]}
+          style={[
+            styles.proceedBtnView,
+            this.state.consultation != -1 && this.state.attachments.length > 0
+              ? styles.enable
+              : styles.disable
+          ]}
         >
           <View>
             <Text style={styles.proceedBtnTxtHeader}>UPLOAD</Text>
@@ -355,7 +389,9 @@ const styles = StyleSheet.create({
   },
   attachmentView: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "gray"
   },
   containerView: {},
   imagePreviewModal: {

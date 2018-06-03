@@ -37,7 +37,7 @@ export default class DoctorScreen extends Component {
       //streamURLs: sampleStreamURLs,
       streams: [], //list of (id, url: friend Stream URL). Id = socketId
       joinState: "ready", //joining, joined
-      name: "DBSDEMO",
+      name: "EzDocVideoChat",
       sockedId: "",
       peerId: "",
       callMuted: false,

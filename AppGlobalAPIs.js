@@ -78,8 +78,22 @@ export function updateConsultation(headers, data) {
 
 export function getUserConsultations(headers, data) {
   return fetch(
-    // URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + data,
-    URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + "1223485690",
+    URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + data,
+    // URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + "1223485690",
+    {
+      method: "GET",
+      headers: headers
+    }
+  )
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
+export function getDoctorsListBySpecialization(headers, data) {
+  return fetch(
+    URL_CONFIG.BASE_URL + URL_CONFIG.GET_DOCTORS_BY_SPECIALIZATION + data,
     {
       method: "GET",
       headers: headers
@@ -106,7 +120,7 @@ export function uploadAttachments(headers, data) {
   return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.UPLOAD_ATTACHMENTS, {
     method: "POST",
     headers: headers,
-    body: JSON.stringify(data)
+    body: data
   })
     .then(response => response.json())
     .then(responseJson => {

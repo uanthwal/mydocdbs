@@ -18,6 +18,7 @@ import {
 } from "../PushNotification/Listeners";
 import firebaseClient from "../PushNotification/FirebaseClient";
 import { login, updateFCMNotificationId } from "../../AppGlobalAPIs";
+import LoadingIndicator from "../Shared/LoadingIndicator";
 const storageServices = require("../Shared/Storage.js");
 
 var SharedPreferences = require("react-native-shared-preferences");
@@ -30,7 +31,9 @@ export default class HomeScreen extends Component {
     this.state = {
       isOpen: false,
       selectedItem: "Home",
-      userRole: null
+      userRole: null,
+      categories: [],
+      isLoading: true
     };
     this._handleBackButton = this._handleBackButton.bind(this);
   }
@@ -53,6 +56,10 @@ export default class HomeScreen extends Component {
               //User is logged in
               // console.log("loggedInUserIdPromise: ", value);
               this.setState({ userRole: JSON.parse(value[3])["userType"] });
+              this.setState({
+                categories: this.getCategories(this.state.userRole),
+                isLoading: false
+              });
               let payload = {
                 mobileNumber: JSON.parse(value[0]),
                 notificationId: token
@@ -139,7 +146,7 @@ export default class HomeScreen extends Component {
         {
           icon: require("../../images/icon/reports.png"),
           label: "My Reports",
-          page: ""
+          page: "myreportsscreen"
         },
         {
           icon: require("../../images/icon/upload.png"),
@@ -182,7 +189,7 @@ export default class HomeScreen extends Component {
         {
           icon: require("../../images/icon/reports.png"),
           label: "My Reports",
-          page: ""
+          page: "myreportsscreen"
         },
         {
           icon: require("../../images/icon/patient.png"),
@@ -208,33 +215,32 @@ export default class HomeScreen extends Component {
   }
   render() {
     const iconPath = "../../images/icon/";
-    const categories = this.getCategories(this.state.userRole);
-    if (this.state.userRole == "healthWorker") {
-    } else {
-    }
 
     const highLightColor = appThemeColor.highLightColor;
     return (
       <View style={[styles.container]}>
-        <GridView
-          itemDimension={100}
-          items={categories}
-          style={styles.gridView}
-          renderItem={item => (
-            <View style={[styles.itemContainer, styles.iosCard]}>
-              <TouchableHighlight
-                style={styles.drawerItem}
-                onPress={() => this.props.navigation.navigate(item.page)}
-                underlayColor={highLightColor}
-              >
-                <View>
-                  <Image source={item.icon} style={styles.itemImg} />
-                  <Text style={styles.itemName}>{item.label}</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-          )}
-        />
+        {this.state.isLoading ? <LoadingIndicator /> : null}
+        {this.state.categories.length > 0 ? (
+          <GridView
+            itemDimension={100}
+            items={this.state.categories}
+            style={styles.gridView}
+            renderItem={item => (
+              <View style={[styles.itemContainer, styles.iosCard]}>
+                <TouchableHighlight
+                  style={styles.drawerItem}
+                  onPress={() => this.props.navigation.navigate(item.page)}
+                  underlayColor={highLightColor}
+                >
+                  <View>
+                    <Image source={item.icon} style={styles.itemImg} />
+                    <Text style={styles.itemName}>{item.label}</Text>
+                  </View>
+                </TouchableHighlight>
+              </View>
+            )}
+          />
+        ) : null}
       </View>
     );
   }

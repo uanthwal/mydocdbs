@@ -44,7 +44,7 @@ export default class OutgoingCallScreen extends Component {
       activeStreamId: null,
       streams: [], //list of (id, url: friend Stream URL). Id = socketId
       joinState: "ready", //joining, joined
-      name: "DBSDEMO",
+      name: "EzDocVideoChat",
       sockedId: "",
       peerId: "",
       callMuted: false,
@@ -96,10 +96,10 @@ export default class OutgoingCallScreen extends Component {
               // );
             })
             .catch(error => {
-              // console.log(
-              //   "Error while sending the notification to user called: ",
-              //   error
-              // );
+              console.log(
+                "Error while sending the notification to user called: ",
+                error
+              );
             });
 
           webRTCServices.getLocalStream(this.state.isFront, stream => {
