@@ -52,9 +52,59 @@ export function registerPatient(headers, data) {
     });
 }
 
+export function createConsultation(headers, data) {
+  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.CREATE_CONSULTATION, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
+export function updateConsultation(headers, data) {
+  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.UPDATE_CONSULTATION, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(data)
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
 export function getUserConsultations(headers, data) {
-  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + data, {
+  return fetch(
+    // URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + data,
+    URL_CONFIG.BASE_URL + URL_CONFIG.GET_ACTIVE_CONSULTATIONS + "1223485690",
+    {
+      method: "GET",
+      headers: headers
+    }
+  )
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
+export function getAllPatientsList(headers) {
+  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.GET_ALL_PATIENTS, {
     method: "GET",
+    headers: headers
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      return responseJson;
+    });
+}
+
+export function uploadAttachments(headers, data) {
+  return fetch(URL_CONFIG.BASE_URL + URL_CONFIG.UPLOAD_ATTACHMENTS, {
+    method: "POST",
     headers: headers,
     body: JSON.stringify(data)
   })

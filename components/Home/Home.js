@@ -29,68 +29,14 @@ export default class HomeScreen extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      selectedItem: "Home"
+      selectedItem: "Home",
+      userRole: null
     };
     this._handleBackButton = this._handleBackButton.bind(this);
   }
   componentDidMount() {
-    // storageServices.save("prevNotificationId", "TEMP_VAL");
     BackHandler.addEventListener("hardwareBackPress", this._handleBackButton);
     registerAppListener(this.props.navigation);
-    // FCM.getInitialNotification().then(notif => {
-    //   console.log("Notification Received in getInitialNotification: ", notif);
-    //   if (notif && notif.target_screen) {
-    //     // if (notif.target_screen === "doctorconnectscreen") {
-    //     //   console.log("Moving to incoming call screen");
-    //     //   // setTimeout(() => {
-    //     //   //   navigation.navigate("incomingcallscreen", {
-    //     //   //     notificationData: JSON.stringify(
-    //     //   //       notif.notification_data
-    //     //   //     )
-    //     //   //   });
-    //     //   // }, 100);
-    //     //   FCM.removeAllDeliveredNotifications();
-    //     //   return;
-    //     // }
-
-    //     let prevNotificationPromise = storageServices.read(
-    //       "prevNotificationId"
-    //     );
-    //     if (prevNotificationPromise) {
-    //       prevNotificationPromise
-    //         .then(value => {
-    //           console.log(
-    //             "fetching prevNotification value: ",
-    //             JSON.parse(value)
-    //           );
-    //           if (value && JSON.parse(value)) {
-    //             if (notif && notif.id != value && value != "TEMP_VAL") {
-    //               storageServices.save("prevNotificationId", notif.id);
-    //               if (notif.target_screen === "doctorconnectscreen") {
-    //                 console.log("Moving to incoming call screen");
-    //                 // setTimeout(() => {
-    //                 //   navigation.navigate("incomingcallscreen", {
-    //                 //     notificationData: JSON.stringify(
-    //                 //       notif.notification_data
-    //                 //     )
-    //                 //   });
-    //                 // }, 100);
-    //                 return;
-    //               }
-    //             }
-    //           }
-    //         })
-    //         .catch(function(error) {
-    //           console.log(
-    //             "There has been a problem with your fetch operation: " +
-    //               error.message
-    //           );
-    //           // ADD THIS THROW error
-    //           throw error;
-    //         });
-    //     }
-    //   }
-    // });
     // Get the device FCM Token
     FCM.getFCMToken()
       .then(token => {
@@ -98,12 +44,15 @@ export default class HomeScreen extends Component {
         let loggedInUserIdPromise = storageServices.readMultiple([
           "loggedInUserId",
           "auth-api-key",
-          "x-csrf-token"
+          "x-csrf-token",
+          "loggedInUserData"
         ]);
         loggedInUserIdPromise
           .then(value => {
             if (value != null) {
               //User is logged in
+              // console.log("loggedInUserIdPromise: ", value);
+              this.setState({ userRole: JSON.parse(value[3])["userType"] });
               let payload = {
                 mobileNumber: JSON.parse(value[0]),
                 notificationId: token
@@ -116,10 +65,6 @@ export default class HomeScreen extends Component {
               };
               updateFCMNotificationId(headers, payload)
                 .then(responseData => {
-                  // console.log(
-                  //   "Update Notification ID Response: ",
-                  //   responseData
-                  // );
                   if (responseData.code == 0) {
                     // console.log("Notification ID updated!!");
                   } else {
@@ -129,11 +74,6 @@ export default class HomeScreen extends Component {
                 .catch(error => {
                   console.log("Update Notification ID Response Error: ", error);
                 });
-            } else {
-              // console.log(
-              //   "HomeScreen: Error while updating Notification ID: ",
-              //   error
-              // );
             }
           })
           .catch(error => {
@@ -148,27 +88,6 @@ export default class HomeScreen extends Component {
       .catch(error => {
         console.log("HomeScreen: In catch of getting the Token: ", error);
       });
-    // let tokenPromise = storageServices.read("doctorconnectscreen");
-    // if (tokenPromise) {
-    //   tokenPromise
-    //     .then(tokenValue => {
-    //       console.log("fetching doctconnect value: ", JSON.parse(tokenValue));
-    //       if (tokenValue && JSON.parse(tokenValue)) {
-    //         storageServices.save("doctorconnectscreen", false);
-    //         this.props.navigation.navigate("doctorconnectscreen", {
-    //           callFrom: "userID"
-    //         });
-    //       }
-    //     })
-    //     .catch(function(error) {
-    //       console.log(
-    //         "There has been a problem with your fetch operation: " +
-    //           error.message
-    //       );
-    //       // ADD THIS THROW error
-    //       throw error;
-    //     });
-    // }
   }
 
   componentWillUnmount() {
@@ -199,55 +118,101 @@ export default class HomeScreen extends Component {
       selectedItem: item
     });
 
+  getCategories(userRole) {
+    if (userRole == "doctor")
+      return [
+        {
+          icon: require("../../images/icon/connect.png"),
+          label: "Patient Connect",
+          page: "doctorconnectscreen"
+        },
+        {
+          icon: require("../../images/icon/search_patient.png"),
+          label: "Search Patient",
+          page: "patientsearchscreen"
+        },
+        {
+          icon: require("../../images/icon/chatbot.png"),
+          label: "Chat Bot",
+          page: "chatscreen"
+        },
+        {
+          icon: require("../../images/icon/reports.png"),
+          label: "My Reports",
+          page: ""
+        },
+        {
+          icon: require("../../images/icon/upload.png"),
+          label: "Scan Upload",
+          page: "scanuploadscreen"
+        },
+        {
+          icon: require("../../images/icon/history.png"),
+          label: "History",
+          page: ""
+        },
+        {
+          icon: require("../../images/icon/notifications.png"),
+          label: "Notifications",
+          page: ""
+        }
+      ];
+    else
+      return [
+        {
+          icon: require("../../images/icon/search_doctor.png"),
+          label: "Search Doctor",
+          page: "specializationscreen"
+        },
+        {
+          icon: require("../../images/icon/connect.png"),
+          label: "Doctor Connect",
+          page: "doctorconnectscreen"
+        },
+        {
+          icon: require("../../images/icon/search_patient.png"),
+          label: "Search Patient",
+          page: "patientsearchscreen"
+        },
+        {
+          icon: require("../../images/icon/chatbot.png"),
+          label: "Chat Bot",
+          page: "chatscreen"
+        },
+        {
+          icon: require("../../images/icon/reports.png"),
+          label: "My Reports",
+          page: ""
+        },
+        {
+          icon: require("../../images/icon/patient.png"),
+          label: "Add Patient",
+          page: "addpatientscreen"
+        },
+        {
+          icon: require("../../images/icon/upload.png"),
+          label: "Scan Upload",
+          page: "scanuploadscreen"
+        },
+        {
+          icon: require("../../images/icon/history.png"),
+          label: "History",
+          page: ""
+        },
+        {
+          icon: require("../../images/icon/notifications.png"),
+          label: "Notifications",
+          page: ""
+        }
+      ];
+  }
   render() {
     const iconPath = "../../images/icon/";
-    const categories = [
-      {
-        icon: require("../../images/icon/search_doctor.png"),
-        label: "Search Doctor",
-        page: "specializationscreen"
-      },
-      {
-        icon: require("../../images/icon/connect.png"),
-        label: "Doctor Connect",
-        page: "doctorconnectscreen"
-      },
-      {
-        icon: require("../../images/icon/search_patient.png"),
-        label: "Search Patient",
-        page: ""
-      },
-      {
-        icon: require("../../images/icon/chatbot.png"),
-        label: "Chat Bot",
-        page: "chatscreen"
-      },
-      {
-        icon: require("../../images/icon/reports.png"),
-        label: "My Reports",
-        page: ""
-      },
-      {
-        icon: require("../../images/icon/patient.png"),
-        label: "Add Patient",
-        page: "addpatientscreen"
-      },
-      {
-        icon: require("../../images/icon/upload.png"),
-        label: "Scan Upload",
-        page: "scanuploadscreen"
-      },
-      {
-        icon: require("../../images/icon/history.png"),
-        label: "History",
-        page: ""
-      },
-      {
-        icon: require("../../images/icon/notifications.png"),
-        label: "Notifications",
-        page: "incomingcallscreen"
-      }
-    ];
+    const categories = this.getCategories(this.state.userRole);
+    if (this.state.userRole == "healthWorker") {
+    } else {
+    }
+
     const highLightColor = appThemeColor.highLightColor;
     return (
       <View style={[styles.container]}>

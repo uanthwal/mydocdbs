@@ -19,36 +19,67 @@ import { appThemeColor } from "../../AppGlobalConfig";
 var ImagePicker = require("react-native-image-picker");
 import FilePickerManager from "react-native-file-picker";
 import PDFView from "react-native-pdf-view";
+const storageServices = require("../Shared/Storage.js");
+import { getUserConsultations } from "../../AppGlobalAPIs";
+import { uploadAttachments } from "../../AppGlobalAPIs";
 
 export default class ScanUploadScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       avatarSource: null,
-      prescriptions: [
-        { id: 1, data: "Prescription 1" },
-        { id: 2, data: "Prescription 2" }
-      ],
-      prescription: "-1",
+      consultationData: [],
+      consultation: "-1",
       attachments: [],
       displayAttachments: false,
       modalVisible: false,
       previewData: { data: null, type: null }
     };
     this.onClickAddAttachment = this.onClickAddAttachment.bind(this);
-    this.prescriptionChanged = this.prescriptionChanged.bind(this);
+    this.consultationChanged = this.consultationChanged.bind(this);
     this.onClickCloseModal = this.onClickCloseModal.bind(this);
     this.onClickAddFile = this.onClickAddFile.bind(this);
+    this.onClickUploadBtn = this.onClickUploadBtn.bind(this);
   }
 
-  prescriptionChanged(value) {
+  componentDidMount() {
+    let loggedInUserIdPromise = storageServices.readMultiple([
+      "loggedInUserId",
+      "auth-api-key",
+      "x-csrf-token"
+    ]);
+    loggedInUserIdPromise
+      .then(value => {
+        let headers = {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "auth-api-key": JSON.parse(value[1]),
+          "x-csrf-token": JSON.parse(value[2])
+        };
+        getUserConsultations(headers, JSON.parse(value[0]))
+          .then(responseData => {
+            console.log("getUserConsultations API Response: ", responseData);
+            this.setState({ consultationData: responseData.data });
+          })
+          .catch(error => {
+            console.log("getUserConsultations Response Error: ", error);
+          });
+      })
+      .catch(error => {
+        console.log("loggedInUserIdPromise Response Error: ", error);
+      });
+  }
+
+  consultationChanged(value) {
+    console.log(value);
     if (value != -1) {
-      let selectedIndex = value - 1;
+      // let selectedIndex = value - 1;
       this.setState({
-        prescription: this.state.prescriptions[selectedIndex]["id"]
+        consultation: value
+        // consultation: this.state.consultationData[selectedIndex]["consultationId"]
       });
     } else {
-      this.setState({ prescription: -1 });
+      this.setState({ consultation: -1 });
     }
     this.setState({ attachments: JSON.parse(JSON.stringify([])) });
     setTimeout(_ => {
@@ -107,8 +138,8 @@ export default class ScanUploadScreen extends React.Component {
         console.log("ImagePicker Error: ", response.error);
       } else {
         this.state.attachments.push({
-          id: this.state.prescription + "_" + new Date().getTime(),
-          name: this.state.prescription + "_" + new Date().getTime(),
+          id: this.state.consultation + "_" + new Date().getTime(),
+          name: this.state.consultation + "_" + new Date().getTime(),
           data: response.uri,
           type: "image"
         });
@@ -127,14 +158,42 @@ export default class ScanUploadScreen extends React.Component {
         console.log("FilePickerManager Error: ", response.error);
       } else {
         this.state.attachments.push({
-          id: this.state.prescription + "_" + new Date().getTime(),
-          name: this.state.prescription + "_" + new Date().getTime(),
+          id: this.state.consultation + "_" + new Date().getTime(),
+          name: this.state.consultation + "_" + new Date().getTime(),
           data: response.path,
           type: response.type
         });
         this.setState({ displayAttachments: true });
       }
     });
+  }
+
+  onClickUploadBtn() {
+    let loggedInUserIdPromise = storageServices.readMultiple([
+      "loggedInUserId",
+      "auth-api-key",
+      "x-csrf-token"
+    ]);
+    loggedInUserIdPromise
+      .then(value => {
+        let headers = {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "auth-api-key": JSON.parse(value[1]),
+          "x-csrf-token": JSON.parse(value[2])
+        };
+        let payload = { consultationId: this.state.consultation };
+        uploadAttachments(headers, payload)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log("onClickUploadBtn Response Error: ", error);
+          });
+      })
+      .catch(error => {
+        console.log("loggedInUserIdPromise Response Error: ", error);
+      });
   }
 
   render() {
@@ -184,13 +243,19 @@ export default class ScanUploadScreen extends React.Component {
         </Modal>
 
         <Picker
-          style={[styles.input, styles.prescriptionsPicker]}
-          selectedValue={this.state.prescription}
-          onValueChange={this.prescriptionChanged.bind(this)}
+          style={[styles.input, styles.consultationsPicker]}
+          selectedValue={this.state.consultation}
+          onValueChange={this.consultationChanged.bind(this)}
         >
-          <Picker.Item label="Select Prescription" value="-1" />
-          {this.state.prescriptions.map((prop, key) => {
-            return <Picker.Item label={prop.data} value={prop.id} key={key} />;
+          <Picker.Item label="Select consultation" value="-1" />
+          {this.state.consultationData.map((prop, key) => {
+            return (
+              <Picker.Item
+                label={prop.consultationId}
+                value={prop.consultationId}
+                key={key}
+              />
+            );
           })}
         </Picker>
         <View style={styles.attachmentsBlock}>
@@ -239,6 +304,14 @@ export default class ScanUploadScreen extends React.Component {
             <Text>No attachments!!</Text>
           )}
         </View>
+        <TouchableOpacity
+          onPress={this.onClickUploadBtn.bind(this)}
+          style={[styles.proceedBtnView, styles.enable]}
+        >
+          <View>
+            <Text style={styles.proceedBtnTxtHeader}>UPLOAD</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -260,7 +333,7 @@ const styles = StyleSheet.create({
   attachmentNameLbl: {
     flex: 1
   },
-  prescriptionsPicker: {
+  consultationsPicker: {
     marginTop: 20,
     marginHorizontal: 20,
     paddingLeft: 20,
@@ -302,5 +375,24 @@ const styles = StyleSheet.create({
   closeModalBtn: {
     height: 35,
     width: 35
+  },
+  proceedBtnView: {
+    paddingBottom: 13,
+    paddingTop: 13,
+    flexDirection: "row",
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 0,
+    width: DEVICE_WIDTH
+  },
+  proceedBtnTxtHeader: {
+    fontSize: 20,
+    color: "white"
+  },
+  enable: {
+    backgroundColor: appThemeColor.textColorTheme
+  },
+  disable: {
+    backgroundColor: "gray"
   }
 });

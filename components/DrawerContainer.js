@@ -27,7 +27,7 @@ export default class DrawerContainer extends React.Component {
       actions: [NavigationActions.navigate({ routeName: "loginStack" })]
     });
     AsyncStorage.clear();
-    storageServices.clear()
+    storageServices.clear();
     this.props.navigation.dispatch(actionToDispatch);
   };
 
@@ -55,15 +55,6 @@ export default class DrawerContainer extends React.Component {
           </View>
         </TouchableHighlight>
         <TouchableHighlight
-          onPress={() => navigation.navigate("ratingscreen")}
-          underlayColor={highLightColor}
-        >
-          <View style={styles.drawerItem}>
-            <Image source={rateusIcon} style={styles.drawerItemIcon} />
-            <Text style={styles.drawerItemText}>Rate us</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight
           onPress={() => navigation.navigate("aboutscreen")}
           underlayColor={highLightColor}
         >
@@ -72,7 +63,10 @@ export default class DrawerContainer extends React.Component {
             <Text style={styles.drawerItemText}>About us</Text>
           </View>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.logout} underlayColor={highLightColor}>
+        <TouchableHighlight
+          onPress={this.logout}
+          underlayColor={highLightColor}
+        >
           <View style={styles.drawerItem}>
             <Image source={logoutIcon} style={styles.drawerItemIcon} />
             <Text style={styles.drawerItemText}>Logout</Text>

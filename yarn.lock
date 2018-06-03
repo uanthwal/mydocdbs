@@ -3238,6 +3238,12 @@ react-native-android-vitamio@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-native-android-vitamio/-/react-native-android-vitamio-6.0.0.tgz#3ec03c2b38450ab964188175bca3d7869af90db9"
 
+react-native-collapsible@^0.11.3:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.3.tgz#5974d9b81f29677372340a21675c9e1c363b410e"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"

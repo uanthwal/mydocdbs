@@ -9,5 +9,10 @@ export var URL_CONFIG = {
   GET_USER_NOTIFICATION_ID: "/users/updateNotificationId",
   SEND_NOTIFICATION_TO_DEVICE: "https://fcm.googleapis.com/fcm/send",
   LEGACY_SERVER_KEY: "AIzaSyBzCWYCJVxySLEECioJvPjZmJA9kr3Zar0", // Get this key from the Project settings > Cloud messaging tab
-  GET_ACTIVE_CONSULTATIONS: "/users/getConsulationDetailsForUser/?mobileNumber="
+  GET_ACTIVE_CONSULTATIONS:
+    "/users/getConsultationDetailsForUser/?mobileNumber=",
+  CREATE_CONSULTATION: "/users/createConsultation",
+  GET_ALL_PATIENTS: "/patient/getallpatient",
+  UPDATE_CONSULTATION: "/patient/updateConsultationDetail",
+  UPLOAD_ATTACHMENTS: "/patient/uploadDoc",
 };

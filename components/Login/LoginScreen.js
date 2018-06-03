@@ -101,11 +101,12 @@ export default class LoginScreen extends Component {
     login(payload)
       .then(responseData => {
         // console.log("Login API Payload: ", payload);
-        // console.log("Login API Response: ", responseData);
+        console.log("Login API Response: ", responseData);
         this.setState({ isLoading: false });
         if (responseData.code == 0) {
           AsyncStorage.clear();
           storageServices.save("loggedInUserId", payload.mobileNumber);
+          storageServices.save("loggedInUserData", responseData.data);
           this.props.navigation.navigate("drawerStack");
         } else {
           this.displayAlert("Invalid Credentials", appMessages.invalidCreds);

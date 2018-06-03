@@ -12,7 +12,6 @@ import SignupScreen from "../components/Signup/SignUp";
 import ForgottenPasswordScreen from "../components/ForgottenPasswordScreen";
 import HomeScreen from "../components/Home/Home";
 import ProfileScreen from "../components/Profile/Profile";
-import RatingScreen from "../components/Rating/Rating";
 import AboutScreen from "../components/About/About";
 import ScanUploadScreen from "../components/ScanUpload/ScanUploadScreen";
 import AddPatientScreen from "../components/Patient/AddPatient";
@@ -27,6 +26,7 @@ import IncomingCallScreen from "../components/DoctorConnect/IncomingCallScreen";
 import OutgoingCallScreen from "../components/DoctorConnect/OutgoingCallScreen";
 import DoctorSpecialityScreen from "../components/Speciality/SpecialityScreen";
 import ChatScreen from "../components/Chat/ChatScreen";
+import SearchPatient from "../components/Search/SearchPatient";
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -41,7 +41,6 @@ const DrawerStack = DrawerNavigator(
   {
     homescreen: { screen: HomeScreen, headerMode: "float" },
     profilescreen: { screen: ProfileScreen, headerMode: "float" },
-    ratingscreen: { screen: RatingScreen, headerMode: "float" },
     aboutscreen: { screen: AboutScreen, headerMode: "float" }
   },
   {
@@ -135,7 +134,7 @@ const HomeStack = StackNavigator(
     doctorconnectscreen: {
       screen: DoctorConnectScreen,
       navigationOptions: {
-        title: "Connect to Doctor",
+        title: "Video Connect",
         headerTitleStyle: {
           flex: 1,
           textAlign: "center"
@@ -201,7 +200,18 @@ const HomeStack = StackNavigator(
     scanuploadscreen: {
       screen: ScanUploadScreen,
       navigationOptions: {
-        title: "Categories",
+        title: "Scan Upload",
+        headerTitleStyle: {
+          flex: 1,
+          textAlign: "center"
+        },
+        headerLeft: null
+      }
+    },
+    patientsearchscreen: {
+      screen: SearchPatient,
+      navigationOptions: {
+        title: "Search Patient",
         headerTitleStyle: {
           flex: 1,
           textAlign: "center"

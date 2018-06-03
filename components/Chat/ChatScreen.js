@@ -118,7 +118,7 @@ export default class ChatScreen extends Component {
         chatMessages: tempMsgs,
         smartAssitantTyping: false
       });
-    }, 2000);
+    }, 3000);
   }
 
   render() {
